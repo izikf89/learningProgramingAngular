@@ -1,0 +1,85 @@
+<app-overview></app-overview>
+<p> מאפשר שלא כל האתר יטען בבת אחת אלא חתיכות חתיכות,</p>
+
+<h3>מה העניין:</h3>
+<p>אחד מהפיצ'רים החשובים באנגולר זה שכל האתר נשלח בפעם הראשונה שפונים לשרת
+   מה שחוסך את הצורך ליצור קשר עם השרת בכל פעם שעוברים דף,
+   אבל מצד שני האתר יכול לפעמים להיות גדול וכבד מה שיגרום לטעינה הראשונה של האתר לקחת הרבה זמן, 
+    בשביל זה נוצר ה<code>lazy loading</code> שמאפשר לקחת חלקים מהאתר ולהגדיר שהם לא יטענו מיד אלא אם ייפנו אליהם,
+  </p>
+
+<p>
+  יש שני אפשרויות להגדיר מתי כל מודול שהוגדר כ<code>lazy loading</code> ייטען:
+  <br> 1) רק מתי שייפנו אליו,
+  <br> 2) ייטען ברקע רק אחרי שכל האתר נטען אלא אם פנו אליו ישירות, זה נקרא <code>preload</code> ,
+</p>
+
+<h2>lazy loading</h2>
+<p>
+  יש להגדיר קלאס מודול מישני שיש לו ראוטר ו component, דוגמא:
+</p>
+<app-card [text]='secondModule'></app-card>
+<p class="line-space">
+  <b>לא</b> לרשום את המודול המישני במודול הראשי,
+  <br> גישה אל המודול תעשה באמצעות ניווט דרך הראוטר הראשי על ידי הוספה של property לpath שנקרא <code>loadChildren</code>, 
+  שהערך שלו זה הנתיב לקובץ שבו נמצא המודול המישני + <code>#</code> + שם המודול המישני, דוגמא: <code>{{ loadChildren }}</code>,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-lazy-loading-simple?file=app/app.component.ts' download='angular-lazy-loading-simple.zip'></app-complate-example>
+
+<p class='line-space'>
+  הדברים הבאים יהרסו את האפקט של <code>lazy loading</code>:
+  <br> <b>forRoot</b> - חובה להשתמש בראוטר של המודול המישני במתודה <code>forChild</code>,
+  <br> <b>import</b> - אם יהיה import במקום כלשהו באתר שייבא את המודול המודול ייפתח מיד,
+  <br> <b>#</b> - חובה להשתמש בהגדרות הניווט "HTML5 pushState", זה מוגדר כברירת מחדל כך שאם לא נגעתם הlazy loading יעבוד
+</p>
+
+<p>
+   בשביל לראות את ההשפעה בפועל עשו את הפעולות הבאות:
+  <br> 1) מהדוגמא החיה למעלה הורידו את הפרוייקט על ידי לחיצה על הכפתור "הורד דוגמא",
+  <br> 2) התקינו את הפרוייקט על ידי הפקודה <span class='cmd'>npm i</span> והעלו אותו על ידי הפקודה <span class='cmd'>ng s -o</span>, 
+  <br> 3) בדפדפן chrome פיתחו את הdevloper tools על ידי לחיצה על F12,
+  <br> 4) כעת לחתו על Network כמו בתמונה:
+  <br> <img src="assets/img/lazy loading - after.PNG" /> 
+  <br> 5) כעת רעננו את הדף על ידי לחיצה על F5, שימו לב שהניווט יהיה לA,
+  <br> 6) כעת לחצו על הלינק B, ותראו איך הדף כאילו נטען עוד כשמנווטים לB בפעם הראשונה,
+  <br> <img src="assets/img/lazy loading - before.PNG" /> 
+</p>
+
+<h2>preload</h2>
+<p>
+  מגדיר שlazy loading יטען ברקע אחרי שהאתר נפתח ולא רק מתי שמנווטים אליו,
+  <br>  path שהוגדר בו מתודה guard מסוג canLoad הpreload לא יפעל בה,
+
+  <br> יש שני אפשרויות איך להגדיר, או שכל הlazy loading יטענו ברקע או שרק אלה שהוגדרו,
+</p>
+
+<h4>1) כל המודולים</h4>
+<p>
+  ייבא לקובץ שנמצא בו הראוטר הראשי את הקלאס הבא: <code>{{ importPreload }}</code>,
+  <br> כעת בראוטר הראשי הוסף למתודה <code>forRoot</code> פרמטר נוסף חוץ מהroutes, הפרמטר יהיה האובייקט הבא: <code>{{ preloadAll }}</code>,
+  <br> דוגמא איך הראוטר אמור להראות:
+  <app-card [text]='preloadAllComplate'></app-card>
+</p>
+<p>
+  כעת כל המודולים שהם lazy-loading יטענו ברקע כשהחלק שאליו ניווט באתר יגמור ליטען,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-preload-all?file=app/app.component.ts' download='angular-preload-all.zip'></app-complate-example>
+
+<h4>2) מודול מסוים</h4>
+<p>
+  צור את הservice הבא: 
+  <app-card [text]='preloadService'></app-card>
+</p>
+<p>
+  כעת רשום את הservice במודול הראשי,
+  ייבא קובץ שנמצא בו הראוטר הראשי את הקלאס הבא: <code>{{ importPreload }}</code>,
+  <br> כעת בראוטר הראשי הוסף למתודה <code>forRoot</code> פרמטר נוסף חוץ מהroutes, הפרמטר יהיה האובייקט הבא: <code>{{ preloadCertain }}</code>, שימו לב שהproperty <code>preloadingStrategy</code> מכיל את הservice שהגדרנו מקודם,
+  <br> דוגמא איך הראוטר אמור להראות:
+  <app-card [text]='preloadCertainComplate'></app-card>
+</p>
+<p>
+  כעת כל מודול lazy-loading שנרצה שיהיה מוגדר שיטען ברקע אחרי שהאתר נטען יש להוסיף לpath שמפנה אליו את הproperty הבא <code>{{ preloadInPath }}</code>,
+  <br> path שהוגדרה preload אמורה להראות כך: <code>{{ preloadInPathComplate }}</code>,
+  <br> <b>הסבר</b> - הפעלנו על הpath <code>service</code> שעושה שבמקרה שהpath מכיל data שמכיל אובייקט <code>preload: true</code> הראוטר מפעיל עליו preload,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-preload-certin?file=app/app.component.ts' download='angular-preload-certin.zip'></app-complate-example>

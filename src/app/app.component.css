@@ -1,0 +1,115 @@
+mat-sidenav-content {
+    position: fixed;
+    width: 100%;
+    padding-top: 66px;
+    overflow: hidden;
+}
+
+.up-container {
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    top: 0;
+}
+
+.title {
+    margin-top: 46px;
+}
+
+.container {
+    padding-bottom: 100px;
+}
+
+.btn-menu {
+    width: 57px;
+    min-width: unset;
+    border: solid 1px;
+    margin: 10px;
+    background: linear-gradient(to bottom, #009933 0%, #33cc33 74%);
+    opacity: 0.6;
+    z-index: 1;
+    position: absolute;
+}
+
+mat-sidenav {
+    position: fixed;
+}
+
+:host ::ng-deep mat-nav-list {
+    padding-top: 68px;
+}
+
+.large-screen app-nav-list {
+    position: fixed;
+    right: 0;
+    top: 66px;
+    bottom: 0;
+    border-left: solid black 1px;
+    overflow: auto;
+}
+
+/* .large-screen .router-container {
+    top: 68px;
+    bottom: 0;
+    right: 0px;
+    left: 0px;
+    padding-right: 275px;
+    padding-bottom: 300px;
+    margin: 0px;
+    position: absolute;
+    overflow: auto;
+} */
+
+.large-screen .container {
+    padding-right: 291px;
+}
+
+:host ::ng-deep .large-screen mat-nav-list {
+    padding-top:  5px;
+}
+
+.router {
+    margin-bottom: 50px;
+} 
+
+app-header {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    min-width: 400px;
+    z-index: 2;
+}
+
+mat-sidenav-content {
+    min-width: 400px;
+}
+
+.title {
+    display: inline-block;
+} 
+
+.btn-top {
+    text-align: center;
+    padding: 5vh 0;
+}
+
+.btn-back-top {
+    width: auto;
+    float: right;
+}
+
+.btn-next-top {
+    width: auto;
+    float: left;
+}
+
+.btn-next-bottom {
+    float: left;
+    color: white;
+    background: linear-gradient(to bottom, #009933 0%, #33cc33 100%);
+
+}
+
+a.all-paths {
+    color: white;
+}

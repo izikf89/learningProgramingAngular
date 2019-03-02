@@ -1,0 +1,70 @@
+<h2>מה זה עושה</h2>
+<p>
+  directive נועד בשביל ליצור attributes חדשים שמבצעים פעולות על התג המארח,
+</p>
+
+<p>בחלק מהדוגמאות נעשה שימוש במתודה <code>ngOnInit</code>, המתודה הזאת מובנית באנגולר ומוגדרת שהיא מופעלת באופן אוטומטי כשהקלאס נוצר,</p>
+
+<h5>איך כותבים</h5>
+<p>
+  1) יוצרים קלאס מסוג directive (בcli <span class='cmd'>ng g d myDirectiveName</span>),
+  <br> 2) מגדירים את השם של הdirective החדש בתוך סוגריים מרובעות בproprty <code>selector</code> שנמצא בקלאס <code>@Directive</code> כמו בדוגמא: <code>{{ selectorExample }}</code>,
+  <br> 3) כותבים את הפעולות שאנחנו מעוניינים לבצע עלוי בקלאס של הdirective,
+  <br> 4) רושמים את הdirective במודול בproprty declarations,
+</p>
+
+<p>כעת נפרט את הפעולות שאפשר לבצע בdirective: </p>
+
+<h4>properties</h4>
+<p>
+  ניתן לגשת לproperties של התג המארח,
+  <br> הגישה נעשית באמצעות הservice <code>ElementRef</code> והproperty שלו <code>nativeElement</code>, 
+</p>
+<app-complate-example [card] = 'elementRef' example='https://stackblitz.com/edit/directive-elementref?file=app/app.component.ts' download='directive-elementref.zip'></app-complate-example>
+
+<h4>event</h4>
+<p>
+  ניתן להאזין לevent שמתרחש בתג באמצעות המתודה <code>HostListner</code>,
+</p>
+<app-complate-example [card] = 'event' example='https://stackblitz.com/edit/directive-event?file=app/app.component.ts' download='directive-event.zip'></app-complate-example>
+
+<h4>input</h4>
+<p>
+  ניתן ליצור attribute נוסף שיקבל ערך עם המתודה  <code>Input</code>,
+</p>
+<app-complate-example [card] = 'input' example='https://stackblitz.com/edit/directive-input?file=app/app.component.ts' download='directive-input.zip'></app-complate-example>
+
+<p>
+  ניתן להגדיר שהdirective עצמו יקבל ערך,
+</p>
+<app-complate-example [card] = 'inputSelf' example='https://stackblitz.com/edit/directive-input-self?file=app/app.component.ts' download='directive-input-self.zip'></app-complate-example>
+<p></p>
+<p>הערה: אם שמתם לב שהinput צריך להיות בסוגריים מרובעים מכיון שהוא מתקשר בין התצוגה והקוד.</p>
+
+<h2>selector</h2>
+<p>
+  עד עכשיו בproperty selector הגדירנו את הdirective כattribut אחד בלבד, ישנם עוד אפשרויות הגדרה בselector כדלהלן:
+</p>
+<p>
+   ניתן להגדיר את הdirective כקלאס css או תג html (id אי אפשר) וכן ניתן להגדיר את הdirective בכמה כינויים כמו בדוגמא הבאה: <code>selector: '.directiveClass, directiveTag', </code>,
+   <br>דוגמא לקובץ מודול:
+  <app-complate-example [card] = 'selectorTag' example='https://stackblitz.com/edit/directive-selector-tag?file=app/app.component.ts' download='directive-selector-tag.zip'></app-complate-example>  
+  דוגמא לcomponent:
+  <app-complate-example [card] = 'selectorClass' example='https://stackblitz.com/edit/directive-selector-class?file=app/app.component.ts' download='directive-selector-class.zip'></app-complate-example>  
+</p>
+<p>
+  ניתן להגדיר שהdirective יעבוד רק אם יקבל ערך כמו בדוגמא הבאה: <code>selector: '[attribute=something]'</code>,
+  <app-complate-example [card] = 'selectorReceive' example='https://stackblitz.com/edit/directive-selector-receive?file=app/app.component.ts' download='directive-selector-receive.zip'></app-complate-example>
+</p>
+<p>
+  ניתן להגדיר שהdirective יפעל רק בתג מסוים כמו בדוגמא הבאה: <code>selector: 'tagName[attribute]'</code>,
+  <app-complate-example [card] = 'selectorTagOnly' example='https://stackblitz.com/edit/directive-selector-tag-only?file=app/app.component.ts' download='directive-selector-tag-only.zip'></app-complate-example>  
+</p>
+<p>
+   ניתן להגדיר directive גם על תג או attribute שכבר קיימים כמו לדוגמא התג <code>h1</code> והattribute <code>type</code>, 
+  <app-complate-example [card] = 'selectorExist' example='https://stackblitz.com/edit/directive-selector-exist?file=app/app.component.ts' download='directive-selector-exist.zip'></app-complate-example>  
+</p>
+<p>
+   ניתן להגדיר שהdirective יחול בכל מקום חוץ מאשר בתג או cssClass כמו בדוגמא הבאה: <code>selector: ':not(h1)'</code>, 
+  <app-complate-example [card] = 'selectorNot' example='https://stackblitz.com/edit/directive-selector-not?file=app/app.component.ts' download='directive-selector-not.zip'></app-complate-example>   
+</p>

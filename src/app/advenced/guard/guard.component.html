@@ -1,0 +1,65 @@
+<app-overview></app-overview>
+<p> מתודות מסוג <code>guard</code> מופעלות כאשר מנווטים בראוטר של אנגולר, הם מוגדרות בקלאס של הראוטר בpath, המתודות האלה יכולות לחסום את הניווט ולבצע פעולות,  </p>
+<p>
+  רשימת המתודות: 
+</p>
+<ul>
+  <li><b>canActive</b> - מופעלת בניווט לכתובת או מהכתובת, יכולה לחסום ניווט, מיועדת לבצע אימות הרשאות כניסה,</li>
+  <li><b>canActiveChild</b> - אותו דבר כמו canActive רק שזה מופעל על הchildren של הכתובת,</li>
+  <li><b>canDeactivate</b> - מופעלת בניווט מהכתובת, יכולה לחסום את הניווט, פחות פשוטה להגדרה אבל עם אפשרות לגשת לcomponent הנוכחי, מיועדת למנוע איבוד המידע שבדף במידה ולא נשמר,</li>
+  <li><b>reslove</b> - מופעל בגלישה לכתובת, לא יכולה לחסום ניווט, מיועדת לבצע ניווט מחדש,</li>
+  <li><b>canLoad</b> - מופעלת בגלישה לכתובת, יכולה לחסום ניווט, פועלת על lazy-loading בלבד, מונע הפעלה מוחלטת של הניווט (מה שאומר שהlazy-loading לא נטען בניגוד לcanActive שגם אם חוסם את הכניסה לניווט עדיין הlazy-loading נטען), חוסם מצב preload בlazy-loading,</li>
+</ul>
+
+<p>
+  כל הgaurd צריכים להיות בקלאס מסוג service,
+  <br> בservice אחד ניתן לכתוב כמה gaurd,
+</p>
+
+<p> הגדרה של guard נעשית על ידי הוספת property לpath בראוטר, השם של הproperty זה שם הguard שבו משתמשים, הערך של הproperty זה מערך של הקלאסים שמחזיקים את הgaurd, דוגמא לשימוש בcanActive : <code>{{ importToPath }}</code>,</p>
+
+<h2>canActive</h2>
+<p>
+  מופעלת בניווט לכתובת או מהכתובת,
+  <br> יש ליצור service שמחזיק כproperty את המתודה <code>canActive</code>, כמו בדוגמא הבאה:
+  <app-card [text]='canActive'></app-card> 
+  <br> וכמובן לרשום את הservice במודול בproperty providers,
+  <br> כעת יש להוסיף בpath שבראוטר property בשם canActive שהערך שלו זה מערך שמכיל את הservice, כמו בדוגמא הבאה: <code>{{ canActivePath }}</code>,
+  <br> כשננווט לכתובת הזאת או מהכתובת תופעל המתודה canActive, אם המתודה תחזיר <code>false</code> הניווט יעצר, 
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-canactive?file=app/app.component.ts' download='angular-canactive.zip'></app-complate-example>
+
+<h2>canDeactivate</h2>
+<p>
+  המתודה הזאת מופעלת רק מתי שיוצאים מהכתובת שבו הוגדרה,
+  <br> יש ליצור service שמחזיק כproperty את המתודה <code>canDeactivate</code>, כמו בדוגמא הבאה:
+  <app-card [text]='canDeactivate'></app-card> 
+  <br> וכמובן לרשום את הservice במודול בproperty providers,
+  <br> כעת יש להוסיף בpath שבראוטר property בשם canDeactivate שהערך שלו זה מערך שמכיל את הservice, כמו בדוגמא הבאה: <code>{{ canDeactivatePath }}</code>,
+  <br> כשננווט מהכתובת תופעל המתודה canDeactivate, אם המתודה תחזיר <code>false</code> הניווט יעצר, 
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-candeactivate?file=app/app.component.ts' download='angular-candeactivate.zip'></app-complate-example>
+
+<h2>reslove</h2>
+<p>
+  המתודה הזאת מופעלת רק מתי שנכנסים לכתובת שבו הוגדרה,
+  <br> יש ליצור service שמחזיק כproperty את המתודה <code>reslove</code>, כמו בדוגמא הבאה:
+  <app-card [text]='reslove'></app-card> 
+  <br> וכמובן לרשום את הservice במודול בproperty providers,
+  <br> כעת יש להוסיף בpath שבראוטר property בשם reslove שהערך שלו זה מערך שמכיל את הservice, כמו בדוגמא הבאה: <code>{{ reslovePath }}</code>,
+  <br> כשננווט מהכתובת תופעל המתודה reslove, גם אם המתודה תחזיר <code>false</code> הניווט <b>לא</b> יעצר, 
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-reslove?file=app/app.component.ts' download='angular-reslove.zip'></app-complate-example>
+
+<h2>canLoad</h2>
+<p>
+  המתודה הזאת מופעלת רק מתי שנכנסים לכתובת שבו הוגדרה,
+  <br> המתודה canLoad מופעלת על lazy-loading בלבד,
+  <br> יש ליצור service שמחזיק כproperty את המתודה <code>canLoad</code>, כמו בדוגמא הבאה:
+  <app-card [text]='canLoad'></app-card> 
+  <br> וכמובן לרשום את הservice במודול בproperty <code>providers</code>,
+  <br> כעת יש להוסיף בpath שבראוטר property בשם canLoad שהערך שלו זה מערך שמכיל את הservice, כמו בדוגמא הבאה: <code>{{ canLoadPath }}</code>,
+  <br> כשננווט לכתובת הזאת תופעל המתודה canLoad, אם המתודה תחזיר <code>false</code> הניווט יעצר, 
+  <br> המתודה canLoad חוסמת preload,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-guard-canload?file=app/app.component.ts' download='angular-guard-canload.zip'></app-complate-example>

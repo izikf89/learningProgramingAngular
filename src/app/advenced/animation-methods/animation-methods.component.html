@@ -1,0 +1,110 @@
+<p>בפרק זה נסקור את המודות השונות של האנימציה של אנגולר,</p>
+
+<h2>keyframes</h2>
+<p>
+   המתודה <code>keyframes</code> מאפשר להכניס כמה מתודות <code>style</code> במתודה <code>aninate</code>,
+  <br> המתודה <code>keyframes</code> נכנס כפרמטר השני במתודה <code>aninate</code>, דוגמא: <code>animate('250ms', keyframes([]) )</code>,
+  <br> המתודה <code>keyframes</code> מקבלת כפרמטר מערך של מתודות <code>style</code> ומפעילה אותם אחד אחרי השני, דוגמא: <code>{{ keyframes }}</code>,
+  <br><br>
+  <button *ngIf="show3" [@keyframes]>דוגמא</button>
+  <br><br>  
+</p>
+<app-complate-example [card]='keyframesComplate' example='https://stackblitz.com/edit/angular-animate-keyframes?file=src/app/app.component.ts' download='angular-animate-keyframes.zip' ></app-complate-example>
+
+<h2>state</h2>
+<p>
+  המתודה <code>state</code> מגדירה ערך שבמקרה ששהטריגר יקבל כזה ערך תופעל מתודה<code>style</code>,
+  <br>המתודה <code>state</code> מופעלת במקביל למתודה <code>transition</code>, במקרה של התנגשות המתודה <code>transition</code> תדרוס במהלך האנימציה את המתודה <code>state</code> ולאחר שהאנימציה תגמר המתודה <code>state</code> תופעל,
+  <br> המתודה <code>state</code> נכנסת במערך של הפרמטר השני במתודה <code>trigger</code>, דוגמא: <code>trigger( 'triggerName', [ state(), state(), transition() ])</code>,
+  <br> המתודה <code>state</code> מקבלת שני פרמטרים, הפרמטר הראשון זה הערך שמפעיל את המתודה, הפרמטר השני מכיל מתודה <code>style</code>, דוגמא: <code>state( 'value', style() )</code>,
+  <br><br>
+  <button [@state]="value" >דוגמא</button> value = {{ value }}
+  <br><br>  
+</p>
+<app-complate-example [card]='state' example='https://stackblitz.com/edit/angular-animate-state?file=src/app/app.component.ts' download='angular-animate-state.zip'></app-complate-example>
+
+<p>
+    המתודה <code>state</code> לא חייבת שיהיה את המתודה <code>transition</code> בשביל לעבוד, דוגמא:
+  <br><button [@stateOnly]="value" >דוגמא</button> value = {{ value }},
+</p>
+<app-complate-example [card]='stateOnly' example='https://stackblitz.com/edit/angular-state-only?file=src/app/app.component.ts' download='angular-state-only.zip'></app-complate-example>  
+
+<h2>group</h2>
+<p>
+  המתודה <code>group</code> מאפשרת להפעיל כמה מתודות <code>animate</code> &nbsp;<b>במקביל</b>,
+  <br> המתודה <code>group</code> נכנסת במערך שבפרמטר השני במתודה <code>transition</code>, דוגמא: <code>transition( ':enter', [ group() ] )</code>,
+  <br> המתודה <code>group</code> מקבלת פרמטר אחד שהוא מערך של מתודות <code>animate</code>, דוגמא: <code>group([ animate(), animate() ])</code>,
+  <br><br>
+  <button *ngIf="show3" [@group] >דוגמא</button>
+  <br><br>  
+</p>
+<app-complate-example [card]='group' example='https://stackblitz.com/edit/angular-animate-group?file=src/app/app.component.ts' download='angular-animate-group.zip'></app-complate-example>
+
+<h2>query</h2>
+<p>
+  המתודה <code>query</code> מגדירה שהאנימציה שהמתודה מכילה תופעל רק בתג או קלאס מסויים,
+  <br> המתודה <code>query</code> מופעלת על הchild של התג שבו נמצא הtrigger ולא על התג עצמו,
+  <br> המתודה <code>query</code> נכנסת בפרמטר השני במתודה <code>transition</code>, דוגמא: <code>transition( ':enter', query() )</code>,
+  <br> המתודה <code>query</code> יכולה גם להיות במערך במתודה <code>transition</code>, דוגמא: <code>transition( ':enter', [query(), query()] )</code>,
+  <br> המתודה <code>query</code> מקבלת שני פרמטרים, הפרמטר הראשון זה המטרה (תג או קלאס) בstring, הפרמטר השני זה מערך של המתודות <code>animate</code>, דוגמא: <code>query('h1', [ animate(), animate() ] )</code>,
+  <br><br>
+  <span *ngIf="show2" [@query]>
+      <h1>h1</h1>
+      <h2>h2</h2>
+  </span>
+  <br><br>  
+</p>
+<app-complate-example [card]='query' example='https://stackblitz.com/edit/angular-animate-query?file=src/app/app.component.ts' download='angular-animate-query.zip'></app-complate-example>
+
+<h4>query - optional</h4>
+<p>
+  אם המטרה שבמתודה <code>query</code> לא נמצאת בכלל ניהיה שגיאה וכל האנימציות לא פועלות, בשביל למנוע את זה צריך להגדיר שה<code>query</code> הוא <code>optional</code>,
+  <br> הגדרת <code>optional</code> נעשית על ידי הוספת פרמטר שלישי למתודה <code>query</code>, הפרמטר השלישי זה האובייקט הבא: <code>{{ optional }}</code>,
+  <br> דוגמא: <code>{{ complateOptional }}</code>,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-query-optional?file=src/app/app.component.ts' download='angular-query-optional.zip'></app-complate-example>
+
+<h4>query - limit</h4>
+<p>
+  ניתן להגביל את מספר המטרות שעליהם תופעל המתודה <code>query</code>,
+  <br> ההגבלה נעשית על ידי הוספת פרמטר שלישי למתודה <code>query</code>, הפרמטר השלישי זה אובייקט שהproperty שלו זה <code>limit</code> והערך שלו זה מספר הפעמים שהמתודה <code>query</code> תופעל, דוגמא לאובייקט: <code>{{ limit }}</code>,
+  <br> דוגמא: <code>{{ complateLimit }}</code>,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-query-limit?file=src/app/app.component.ts' download='angular-query-limit.zip'></app-complate-example>
+
+<h4>query - target</h4>
+<p>להלן סוגי המטרות שאפשר להגדיר למתודה <code>query</code>:</p>
+<ul>
+  <li><b>tag - </b>תגי html כמו <code>h1</code>,</li>
+  <li><b>class. - </b>ניתן להגדיר class על ידי הוספת נקודה לפני שם הclass,</li>
+  <li><b>סיטואציה - </b>ניתן להגדיר סיטואציה כמו במתודה <code>transition</code> לדוגמא: <code>:enter</code>,</li>
+  <li><b>trigger@ - </b>ניתן להגדיר <code>@triggerName</code>, אפשר להגדיר את כל הטריגרים הקיימים כך: <code>@*</code></li>
+  <li><b>animating: - </b>כל הchild שעדיין לא הסתיימה האנימציה שהופעלה עליהם כשקרתה הסיטואציה שהפעילה את האנימציה בparent, (מקרה די נדיר <a href='https://stackblitz.com/edit/angular-query-animating?file=src/app/app.component.ts'>דוגמא</a>),</li>
+  <li><b>self: - </b>מגדיר שהאנימציה של המתודה <code>query</code> תיהיה על האלמנט עצמו ולא על הchild שלו, ראה <a href="https://stackblitz.com/edit/angular-query-self?file=src%2Fapp%2Fapp.component.ts">דוגמא</a>,</li>
+  <li><b>* -  </b>מגדיר שהאנימציה תפעל בכל סיטואציה ועל כל אלמנט,</li>
+</ul>
+
+<p>
+  ניתן להגדיר כמה מטרות במתודת <code>query</code> אחת על ידי הפרדה בפסיק, דוגמא: <code>query( 'h1, .class', animate() )</code>
+  <br> ניתן להגדיר מטרה מקוננת כמו בקלאס של css לדוגמא <code>query( 'h1:enter', animate() )</code> יגדיר שהמטרה היא התג <code>h1</code> שמתקיים בו הסיטואציה <code>enter</code>,
+</p>
+
+<h2>stagger</h2>
+<p>
+  המתודה <code>stagger</code> מגדירה זמן השהייה בין אנימציה אחת לשניה במקום שיש מספר אלמנטים,
+  <br> המתודה <code>stagger</code> נכתבת כפרמטר השני במתודה <code>query</code>, דוגמא: <code>query(':enter', stagger())</code>,
+  <br> המתודה <code>stagger</code> מכילה שני פרמטרים, אחד זה זמן ההשהייה והשני זה מערך של מתודות <code>animate</code>, דוגמא: <code>stagger('1s', [animate(), animate()] )</code>,
+</p>
+<div [@stagger] *ngIf='show3'>
+  <div *ngFor="let item of items">{{ item }}</div>
+</div>
+<app-complate-example [card]='stagger' example='https://stackblitz.com/edit/angular-animate-stagger?file=src/app/app.component.ts' download='angular-animate-stagger.zip'></app-complate-example>
+
+<h2>events</h2>
+<p>
+  כל אנימציה שמופעלה משחררת שתי events, אחד כשמתחילה ואחד כשמסתיימת האנימציה,
+  <br> הevent זה הטריגר של האנימציה נקודה ו<code>start</code> או <code>done</code>,
+  <br> דוגמא לevent כשמתחילה האנימציה: <code>(@triggerName.start)='myFunction()'</code>,
+  <br> דוגמא לevent כשמסתיימת האנימציה: <code>(@triggerName.done)='myFunction()'</code>,
+</p>
+<app-complate-example [card]='eventsComplate' example='https://stackblitz.com/edit/angular-animation-events?file=src/app/app.component.ts' download='angular-animation-events.zip'></app-complate-example>

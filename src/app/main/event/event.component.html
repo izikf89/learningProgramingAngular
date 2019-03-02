@@ -1,0 +1,57 @@
+<app-overview></app-overview>
+<p>
+  הsyntex של event באנגולר, 
+</p>
+
+<p>בחלק מהדוגמאות נעשה שימוש במתודה <code>ngOnInit</code>, המתודה הזאת מובנית באנגולר ומוגדרת שהיא מופעלת באופן אוטומטי כשהקלאס נוצר,</p>
+
+<h2>האזנה לevent</h2>
+<p>יש שלושה דרכים להאזין:</p>
+
+<h4>1) בhtml</h4>
+<p>
+  כמו שמגדירים בhtml רגיל רק שבלי האתיות "on" בתחילת השם של הevent ומוקף בבסוגריים עגולות, (binding מהתצוגה לקוד)
+  <br> לדוגמא בhtml רגיל event מסוג click נכתב כך: <code>onClick=''</code> ובאנגולר הוא נכתב כך  <code>(click)=''</code>,
+</p>
+<app-complate-example [card]='htmlEvent' example='https://stackblitz.com/edit/event-html?file=app/app.component.ts' download='event-html.zip'></app-complate-example>
+
+<h4>2) HostListener</h4>
+<p>זה מתודה decorated שמיוחדת להאזנה והיא מוגדרת בתוך הקלאס כך: <code>{{ hostListener }}</code>,</p>
+<app-complate-example [card]='hostListenerComplate' example='https://stackblitz.com/edit/hostlistner?file=app/app.component.ts' download='hostlistner.zip'></app-complate-example>
+<p></p>
+<p>הפרמטר <code>$event</code> הוא אופצוינלי, אפשר גם להגדיר בלעדיו כמו בדוגמא הבאה: <code>{{ hostListenerShort }}</code></p>
+
+<h4>3) host</h4>
+<p>
+  אפשר להגיר את המאזין במתודה decorated בproperty <code>host</code>: <code>{{ host1 }}</code>,
+  <br> ואז להגדיר בקלאס את המתודה שהוגרה בhost עם פרמטר אחד, לדוגמא:  <code>{{ host2 }}</code>,
+</p>
+<app-complate-example [card]='hostComplate' example='https://stackblitz.com/edit/host-property?file=app/app.component.ts' download='host-property.zip'></app-complate-example>
+
+<h4>enter</h4>
+<p>
+  enter זה event מיוחד לאנגולר,
+  <br> הוא קיים רק בתג input, 
+  <br>הוא מופעל כשהפוקוס על הinput ולוחצים על enter,
+  שם הevent הוא <code>keyup.enter</code>,
+</p>
+<app-complate-example [card]='enter' example='https://stackblitz.com/edit/event-enter?file=app/app.component.ts' download='event-enter.zip'></app-complate-example>
+
+<h2>יצירת event</h2>
+<p>יש שני דרכים ליצור event:</p>
+
+<h4>1) decorated output:</h4>
+<p>
+  דבר ראשון צריך לייבא את המתודה decorated ואת האובייקט שיוצרים את הevent כמו בדוגמא: <code>{{ importOutputDecorated }}</code>,
+  <br>מגדירים event בקלאס כמו בדוגמא: <code>@Output() eventName =  new EventEmitter();</code>
+  <br> וכך משחררים את הevent: <code>{{ releaseEvent }}</code>,
+</p>
+<app-complate-example [card]='outputDecoratedComplate' example='https://stackblitz.com/edit/output-decorated?file=app/app.component.ts' download='output-decorated.zip'></app-complate-example>
+
+<h4>2) property output:</h4>
+<p>
+  דבר ראשון צריך לייבא את האובייקט שיוצר את הevent כמו בדוגמא: <code>{{ importOutputProperty }}</code>,
+  <br>מגדירים event בproperty <code>outputs</code> של המתודה decorated של הקלאס כמו בדוגמא: <code>  outputs: ['eventName'],</code>,
+  <br> וכך משחררים את הevent: <code>{{ releaseEvent }}</code>,
+</p>
+<app-complate-example [card]='outputPropertyComplate' example='https://stackblitz.com/edit/output-property?file=app/app.component.ts' download='output-property.zip'></app-complate-example>

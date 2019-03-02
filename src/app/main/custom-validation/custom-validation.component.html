@@ -1,0 +1,38 @@
+<app-overview></app-overview>
+<p>ניתן ליצור validation חדשים לאנגולר</p>
+
+<app-syntex></app-syntex>
+<p>
+  1) הvalidation נכתבת בתוך מתודה,אם הvalidation מקבלת פרמטרים אז המתודה תגדיר פרמטרים,
+  <br> 2) המתודה מחזירה מתודה אחרת שלה יש פרמטר אחד, הפרמטר הזה זה למשעה הtrl של הinput שבו נמצאת הvalidation והוא מחזיק את הערך של הinput,
+  <br> 3) בתוך המתודה השניה נבצע את הvalidation שאנחנו מעוניינים ואז אם הvalidation היא טובה נחזיר null ואם לא נחזיר אובייקט שהkey שלו זה השם של הvalidation והvalue שלו זה true,
+</p>
+<p>בדוגמא הבאה ניצור validation שהערך בinput הוא 5:</p>
+<app-card [text]='functionValidation'></app-card>
+
+<h4>reactive</h4>
+<p>בform מסוג reactive ההפעלה של הvalidation החדש היא מאוד פשוטה רק להכניס את הפונקציה למערך של הvalidation בinput</p>
+<app-complate-example [card]='reactive' example='https://stackblitz.com/edit/angular-validation-reactive?file=app/app.component.ts' download='angular-validation-reactive.zip'></app-complate-example>
+
+<h4>template-driven</h4>
+<p>
+  בform מסוג template-drivenn זה יותר מורכב צריך ליצור directive שמכיל את הvalidation ואז להוסיף את הdirective לinput,
+  <br> הdirective יראה כך:
+</p>
+<app-card [text]='directive'></app-card>
+<p>
+  הסבר:
+  <br> 1) דבר ראשון יש ליצור directive רגיל, שזה אומר להגדיר לו selector מסוג attribute ולרשום את הקלאס שלו במודול,
+  <br> 2) לייבא את הקלאס <code>NG_VALIDATORS</code> כך: <code>{{ importNG_VALIDATORS }}</code>,
+  <br> 3) להוסיף לdirective property <code>providers</code>, בproperty הזה אנחנו רושמים לdirective את הקלאס שמאפשר לdirective להיות validation, בפרק אחר נסביר את התחביר של השורה הזאת, זה צריך להראות כך: <code>{{ providers }}</code>, 
+  <br> 4) בdirective ניצור מתודה בשם <code>validate</code> שמקבלת פרמטר אחד, זה נראה כך: <code>validate(control)</code>, 
+  <br> 5) המתודה הנ"ל תחזיר את הפקודה הבאה: <code>return control ? CustomValidation()(control) : null;</code>, 
+  <br> הסבר על המתודה: הפרמטר במתודה זה הctrl של הinput שבו יהיה הdirective, המתודה מחזירה את הנוסחה הבאה: 
+  אם הctrl null שזה אומר שאין ctrl אז המתודה מחזירה null שזה אומר שאין validation, אם הctrl לא null שזה אומר שיש input לעשות עליו וולידציה, אז המתודה מחזירה את הפונקציה שעושה וולידציה וגם נותנת לה את הctrl כפרמטר למתודה השניה שבפונקציה,
+</p>
+
+<p>כעת אפשר להוסיף את הvalidation לinput כמו כל validation שהם built-in,</p>
+<app-complate-example [card]='templateDriven' example='https://stackblitz.com/edit/angular-validation-template-driven?file=app/app.component.ts' download='angular-validation-template-driven.zip'></app-complate-example>
+
+
+

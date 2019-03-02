@@ -1,0 +1,16 @@
+<app-overview></app-overview>
+<p>מאפשר לשלוט במיקום של child שיתווספו על ידי component שלישי</p>
+
+<app-syntex></app-syntex>
+<p>איפה שנמקם את התג <code>ng-content</code> שם יתווסף ה<code>child</code></p>
+<app-complate-example [card]="ngContent" example='https://stackblitz.com/edit/angular-ngcontent-basic?file=src/app/app.component.ts' dwonload='angular-ngcontent-basic'></app-complate-example>
+
+<p>ניתן למקם מספר child במקום אחד כמו בדוגמא:</p>
+<app-card [text]='muchChild'></app-card>
+
+<h4>multi child</h4>
+<p>
+  ניתן למקם סוגי child שונים במיקום שונה בcomponent
+  <br> הוסיפו לתג <code>ng-content</code> את הattribute <code>select</code> וניתן לו ערך את התג של הchild או id או קלאס שקיים בchild, דוגמא: <code>{{multiChild}}</code>
+</p>
+<app-complate-example [card]="multiChildComplate" example='https://stackblitz.com/edit/angular-ngcontent-select?file=src%2Fapp%2Fapp.component.ts' dwonload='angular-ngcontent-select'></app-complate-example>

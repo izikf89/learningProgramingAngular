@@ -1,0 +1,50 @@
+<p>
+  בפרק זה יובא הכללים שמוכרחים לדעת ב typescript ו observable ו js בשביל להשתמש באנגולר.
+</p>
+
+<h4>class</h4>
+<p>
+  קלאס מתנהג כמו <code>object</code> רגיל ב js , שזה אומר שהקלאס מכיל properties שהם משתנים ומתודות,
+  <br>בתוך הקלאס אל properties פונים עם המילה <code>this</code>,
+  <br>  דוגמא:
+</p>
+<app-complate-example [card]='class' example='https://stackblitz.com/edit/class?file=index.ts' download='class.zip'></app-complate-example>
+
+<h4>import & export</h4>
+<p>
+  בשביל שיהיה אפשר להעתיק אובייקט כלשהו מקובץ לקובץ אחר צריך להשתמש ב <code>export</code> ו <code>import</code>,
+  <br> לפני האובייקט שרוצים ליצא צריך להוסיף <code>export</code> לדוגמא <code>export counter = 1</code>, 
+  <br> ובקובץ המייבא מייבאים בעזרת <code>import</code>, צורת הכתיבה היא קודם <code>import</code> אחרי זה סוגריים מסולסלות עם שם האובייקט המיובא ואחרי זה המילה <code>from</code> ואחרי זה string הנתיב לקובץ המייצא,
+  <br>דוגמא:  
+</p>
+<app-complate-example [card]='import' example='https://stackblitz.com/edit/import-export?file=index.ts' download='import-export.zip'></app-complate-example>
+
+<h4>observable</h4>
+<p>
+  observable זה אובייקט שמחזיק משתנה שאפשר להגדיר שאם הערך שבמשתנה השתנה תבוצע פונקציה, במילים האחרות observable נותן אופציה להאזין למשתנה,
+  <br>observable מגיע מספריה בשם <a href='http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html' target='_blank'>ReactiveX</a> ובקיצור rxjs,
+  <br> באנגולר יש הרבה שימוש ב observable לדוגמא בajax,
+  <br>דוגמא:
+</p>
+<app-complate-example [card]='observable' example='https://stackblitz.com/edit/typescript-observable?file=index.ts' download='typescript-observable.zip'></app-complate-example>
+<h6>הסבר:</h6>
+ <p>
+   יצירה של observable ( ההסבר יהיה בהנחה שה observable מוגדר בתוך קלאס):
+   <br> 1) מייבאים את אובייקט observable כך <span class='code' >import {{'{'}} Subject } from 'rxjs/Subject'</span> (בהנחה שאתם בתוך פרוייקט של אנגולר הספריה ממוקמת בכתובת הזאת) ,
+   <br> 2) יוצרים משתנה רגיל נקרא לו <code>myVar</code> ,
+   <br> 3) יוצרים אובייקט observable כמו זה <span class='code'>myObservable = new Subject()</span> ,
+   <br> 4) בתוך מתודה מכניסים למשתנה הרגיל את האובייקט שהוא observable עם המתודה <code>asObservable().</code>, זה נראה כך: <code>{{' method() { this.myVar = myObservable.asObservable() } '}}</code> ,
+ </p>
+ <p>
+  גישה ל observable:
+  <br> מוסיפים ל observable את המתודה <code>subscribe</code> זה נראה כך: <code>{{' myObservable.subscribe(val)=> { consoel.log(val)}' }}</code> ,
+  <br> מהרגע שתופעל המתודה שמכניסה את ה observable למשתנה בכל פעם שהערך של ה observable ישתנה המתודה subscribe תופעל,
+ </p>
+
+
+<h4>type ב typescript</h4>
+<p>
+  בtypescript צריך להוסיף type לכל משתנה שמוגדר לדוגמא <code>myvar: string = 'i a variable'</code>, 
+  <br> אין חובה להוסיף type , אבל זה מאוד מומלץ, בדוגמאות באתר אין type בשביל להקל את ההבנה של הקוד, 
+  <br> מערך = <code>{{ arrayExample }}</code>,
+</p>

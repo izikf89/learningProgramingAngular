@@ -1,0 +1,13 @@
+code {
+    text-align: left;
+    border: solid 15px lightgrey;
+}
+
+:host {
+    padding: 10px 0;
+    display: block;
+}
+
+pre {
+    margin: 0;
+}

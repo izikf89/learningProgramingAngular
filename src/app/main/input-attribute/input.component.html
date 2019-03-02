@@ -1,0 +1,23 @@
+<app-overview></app-overview>
+<p>ניתן להגדיר בcomponent ןdirective attribute נוסף שיוכל לקבל ערך ולהעביר אותו לקוד</p>
+
+<p>יש שני דרכים איך להגדיר:</p>
+
+<h4>1) input decorated</h4>
+<p>
+  ניתן להגדיר על ידי מתודה decorated בתוך הקלאס
+  <br> דבר ראשון יש לייבא את המתודה <code>@Input</code> כך: <code>{{ importInput }}</code>
+  <br> ההגדרה של הinput נראית כך:<code>@Input('attributeName') propertyName;</code> 
+</p> 
+<app-complate-example [card]='inputDecoratedComplate' example='https://stackblitz.com/edit/input-dcorated?file=app/app.component.ts' download='input-dcorated.zip'></app-complate-example>
+<p></p>
+<p>ניתן גם להגדיר בצורה יותר קצרה כשהשם של הattribute והproperty הוא אותו אחד כך: <code>@Input() attributeName;</code></p>
+<app-complate-example [card]='inputDecoratedShort' example='https://stackblitz.com/edit/input-decorated-short?file=app/app.component.ts' download='input-decorated-short.zip'></app-complate-example>
+
+
+<h4>2) input property</h4>
+<p>ניתן להגדיר את הattribute הנוסף בproperty <code>input</code> במתודה decorated של הקלאס כך: <code>inputProperty</code> </p>
+<app-complate-example [card]='inputPropertyComplate' example='https://stackblitz.com/edit/input-property?file=app/app.component.ts' download='input-property.zip'></app-complate-example>
+<p>ניתן גם להגדיר בצורה יותר קצרה כשהשם של הattribute והproperty הוא אותו אחד כך: <code>inputs: [ 'newAttribute'],</code></p>
+<app-complate-example [card]='inputPropertyShort' example='https://stackblitz.com/edit/input-property-short?file=app/app.component.ts' download='input-property-short.zip'></app-complate-example>
+

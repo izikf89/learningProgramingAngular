@@ -1,0 +1,62 @@
+<app-overview></app-overview>
+<p>intercept מאפשר לגשת לכל ajax שנכנס ויוצא ולשנות אותו</p>
+
+<app-syntex></app-syntex>
+<p>יש ליצור את הservice הבא:</p>
+<app-card [text]='service'></app-card>
+<p class="line-space">
+  כעת יש לייבא לקובץ של המודול הראשי את הקלאס הבא: <code>{{ importHTTP_INTERCEPTORS }}</code>,
+  <br>לאחר מכן יש לרשום את הservice במודול כך: <code>{{ providers }}</code>,
+  <br> המודול יראה כמו זה:
+</p>
+<app-card [text]='module'></app-card>
+
+<h5>איך זה עובד</h5>
+<p>
+   כל ajax שיוצא המתודה <code>intercept</code> שבservice מופעלת,
+  <br> הפרמטר הראשון במתודה (<code>req</code>) מכיל את הajax שיצא,
+  <br> המתודה <code>intercept</code> חוסמת את הajax עד שתשלח אותו שוב על ידי שתחזיר אותו עם הפרמטר השני (<code>next</code>)
+  שמפעיל מתודה בשם <code>handle</code> שמקבלת כפרמטר ajax כמו זה: <code>return next.handle(req);</code>, אם המתודה לא תחזיר את הנ"ל הajax לא ישלח כלל,
+</p>
+
+<h3>גישה לajax יוצא</h3>
+<p>
+  <b>body - </b><code>console.log(req.body)</code>,
+  <br><b>פרמטר מסוים - </b>לפרמטרים שנשלחים בheader ניגשים כך:<code>console.log(req.params.get('keyName'))</code>,
+  <br><b>כל הפרמטרים - </b><code>{{ allParams }}</code>,
+  <br><b>url - </b><code>console.log(req.url)</code>,
+  <br><b>method - </b><code>console.log(req.method)</code>,
+</p>
+
+<h3>שינוי ajax יוצא</h3>
+<p>
+  <b>clone - </b>אפשר לשנות ajax על ידי העתקה של הajax הנוכחי באמצעות המתודה <code>clone</code>, במתודה <code>clone</code> אפשר להוסיף פרמטרים שיישנו את הajax המקורי,
+  <br> דוגמא לclone :
+</p>
+<app-card [text]='clone'></app-card>
+<p>
+  <br><b>שינוי url - </b><code>{{ changeUrl }}</code>,
+  <br><b>שינוי פרמטר קיים או הוספה - </b><code>{{ changeParams }}</code>,
+  <br><b>החלפת הפרמטרים - </b> יש לייבא את הקלאס הבא <code>{{ importHttpParams }}</code>,
+  <br> והclone נראה כך: <code>{{ replaceParams }}</code>,
+  <br><b>החלפת הbody - </b><code>{{ replaceBody }}</code>
+  <br><b>שינוי או הוספת header - </b><code>{{ changeHeader }}</code>
+  <br><b>שינוי מתודת ajax - </b><code>{{ changeMethod }}</code>
+</p>
+
+<h3>גישה לajax חוזר</h3>
+<p>
+  יבא את הקלאס הבא <code>{{ importDo }}</code>,
+  <br> והוסף את המתודה <code>do</code> למתודה <code>handle</code>, דוגמא:
+</p>
+<app-card [text]='do'></app-card>
+<p class='line-space'>הפרמטר <code>event</code> מכיל את התשובה,</p>
+
+<h3>שינוי ajax חוזר</h3>
+<p>
+  ניתן לשנות את הbody של ajax שחזר אם הajax שחזר הוא לא error,
+  <br>ייבא את הקלאס הבא <code>{{ importHttpResponse }}</code>, 
+  <br> וייבא גם את הקלאס הבא <code>{{ importMap }}</code>,
+  <br> והוסף את המתודה <code>map</code> למתודה <code>handle</code> כך:
+</p>
+<app-card [text]='map'></app-card>

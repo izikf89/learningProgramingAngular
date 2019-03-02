@@ -1,0 +1,56 @@
+<app-overview></app-overview>
+<p>באנגולר יש דרך להוסיף שדות בצורה דינאמית בזמן ריצה,</p>
+<p>האפשרות קיימת בform מסוג reactive בלבד,</p>
+
+<app-syntex></app-syntex>
+<p>בגדול יוצרים מערך של input ואז אפשר להוסיף למערך או למחוק לפי הצורך, </p>
+<p>בסוף הפרק יש דוגמא שלמה,</p>
+<p>
+  1) צריך לייבא קלאסים אלו: <code>{{ import }}</code>,
+  <br> 2) בhtml ליצור תג form עם הdirective <code>fromGroup</code> שמגדירים לו שם כלשהו, דוגמא: <code>{{ fromGroup }}</code>,
+  <br> 3) בתוך התג form ניצור תג div שיהיה בו את הdirective <code>formArrayName</code> שבו מגדירים את שם המערך של הinput, דוגמא: <code>{{ formArrayName }}</code>,
+  <br> 4) בתוך הdiv נגדיר תג div נוסף שיכיל את הdirective <code>*ngFor</code>, בתג הזה יהיה את הלולאה שתציג את המערך של הinputs, 
+  הגישה למערך של הinput היא כזאת: השם שהגדרנו בformgroup ואז <code>controls</code> ואז השם שהגדרנו בformArrayName ואז <code>controls</code>,
+  <br> צריך להגדיר ל<code>*ngFor</code> index ואת הindex יש לתת לdirective <code>[formGroupName]</code>,  התג אמור להראות כך: <code>{{ ngFor }}</code>,
+  <br> 5) בתוך התג div השני נוסיף input עם הdirective <code>formControlName</code> וניתן לdirective שם,
+   <br> בשביל להוסיף כפתור שמוחק נוסיף תג button שמאזין לevent click וקורא למתודה שמקבלת פרמטר את הindex של הלולאה כשיש click, דוגמא: <code>{{ input }}</code>,
+  <br> 6) אחרי הform נוסיף button נוסף שמאזין לclick ווקרא למתודה כשיש click,
+</p>
+<p>הhtml אמור להראות כך:</p>
+<app-card [text]='html'></app-card>
+
+<p>
+  כעת נעבור לקלאס,
+  <br> 1) לרשום במתודה constructor את הקלאס <code>FormBuilder</code> כמו בדוגמא: <code>Constructor</code>,
+  <br> 2) כעת ניצור property שיהיה המערך ברירת המחדל של הinput (הinput שיופיעו כשהדף יעלה), המערך יכיל אובייקטים, כל אובייקט זה input, באובייקט יהיה key מה שהגדרנו בdirective formControlName,
+   והvalue זה מערך שהתא הראשון זה הערך ברירת המחשל של הinput ושאר התאים במערך זה validation מהקלאס <code>Validators</code>, דוגמא: <code>{{ arrayInputs }}</code>,
+  <br> 3) ניצור property בשם שנתנו לform בdirective <code>formGroup</code>, הערך של הproperty זה המתודה <code>group</code> שבקלאס FormBuilder שנרשם במתודה constructor,
+   המתודה group מקבלת פרמטר אובייקט שהkey שלו זה השם שהגדרנו בdirective <code>formArrayName</code> והvalue זה המתודה <code>array</code> שבקלאס FormBuilder, המתודה array מקבלת פרמטר מערך ריק, דוגמא: <code>{{ formProperty }}</code>,
+   <br> כעת נגדיר מתודה שתפקידה לקחת את המערך של הinput שיצרנו ולהפוך אותו לctrl בform וכך הform יזהה ויוסיף אותם,
+   <br> 5) ניצור מתודה שמקבלת פרמטר אחד, בשורה הראשונה שלה ניקח את המערך ונמיר את האובייקטים לctrl של input, דוגמא: <code>{{ methodRow1 }}</code>,
+   <br> 6) כעת נהפוך את המערך לאובייקט מיוחד שמחזיק מערך של ctrl של input כך: <code>{{ methodRow2 }}</code>,
+   <br> 7) כעת נוסיף אותו לform כך:  <code>{{ methodRow3 }}</code>,
+   <br> סיימנו עם המתודה היא אמורה להראות כך:
+   <app-card [text]='method'></app-card>
+</p>
+<p></p>
+<p>
+  כעת ניצור את המתודה <code>ngOnInit</code>, בתוכה נפעיל את המתודה שיצרנו וניתן לה כפרמטר את המערך של הinput , <code>{{ NgOnInit }}</code>,
+</p>
+
+<p>
+  כעת ניצור את המתודה שמוסיפה input:
+  <br> בתוך המתודה ניגש לctrl של הform ולproperty שלו שהגדרנו בdirective <code>formArrayName</code> ונעשה להם cast לFormArray כדי שהeditor ידע שזה מערך, ואז נעשה לו push ונכניס לו input חדש כך: <code>{{ add }}</code>,
+</p>
+
+<p>
+  כעת ניצור את המתודה שמוחקת את הinput: 
+  <br> המתודה מקבלת פרמטר אחד שזה הindex של הinput שנחנו מעוניינים למחוק מהמערך,
+  <br>  בתוך המתודה ניגש לctrl של הform ואז נוסיף <code>controls</code> ואז את השם שהגדרנו בdirective formArrayName ואז <code>['controls']</code> וכעת הגענו למערך ונמחק בעזרת המתודה <code>slice</code> את הinput מהמערך של הinputת
+  דוגמא: <code>{{ remove }}</code>,
+</p>
+
+<app-complate-example [card]='complate' example='https://stackblitz.com/edit/angular-form-dynamic?file=app/app.component.ts' download='angular-form-dynamic.zip'></app-complate-example>
+
+<P></P>
+<p>בשביל להבין יותר טוב מומלץ להסתכל בכלי devloper tools של הדפדפנים על הproperties של התג form בשביל להבין איפה נמצאים הinput והמערך של הinput ואיך ניגשנו אליהם,</p>

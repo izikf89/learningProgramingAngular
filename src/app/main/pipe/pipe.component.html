@@ -1,0 +1,68 @@
+<app-overview></app-overview>
+<p> pipe זה מתודה שפועלת על ערכים בתצוגה </p>
+
+<app-syntex></app-syntex>
+<p>
+  pipe נראה כך: <code>{{ pipeSyntex }}</code>,
+  <br>pipe עובד כמו מתודה , היא לוקחת את הערך מבצעת עליו פעולות ומחזירה את התוצאה, 
+  <br> pipe יכול לקבל פרמטר, כמו בדוגמא: <code>{{ parameter }}</code>,
+  <br> אפשר לבצע כמה pipe על אותו ערך כמו בדוגמא: <code>{{ severalPipe }}</code>,
+  <br> יש pipe מובנים built-in באנגולר, ואפשר גם ליצור חדשים,
+</p>
+
+<h2>pipe built-in</h2>
+<p>
+  נביא דוגמא של pipe שהופך אותיות גדולות לקטנות:
+</p>
+<app-complate-example [card]='pipeToDownCase' example='https://stackblitz.com/edit/pipe-simple?file=app/app.component.ts' download='pipe-simple.zip'></app-complate-example>
+
+<p></p>
+<p>לפניכם רשימה של הpipe built-in העיקריים:</p>
+<ul>
+    <li>decimal - מטפל במספרים עשרוניים,</li>
+    <li>percent - הופך מספרים לאחוזים,</li>
+    <li>currency - הופך מספרים לפורמט של כסף</li>
+    <li>date - מציג אובייקטים של datetime בפורמטים שונים</li>
+    <li>json - מציג אובייקטים מסוג json,</li>
+    <li>slice - חותך string ומערכים,</li>
+    <li>titlecase - משנה בstring את האות הראשונה לאות גדולה,</li>
+    <li>lowercase - משנה את האותיות לקטנות,</li>
+    <li>uppercase - משנה את האותיות לגדולות,</li>
+</ul>
+
+<p>חמש הpipe הראשונים ברשימה מקבלים פרמטרים ויש להם הרבה פורמטים שונים, פרטים ראו באתר של <a href='https://angular.io/api?type=pipe' target="_blank" >אנגולר</a></p>
+
+<h2>ליצור pipe</h2>
+<p>
+  1) ייבא את המתודה decorated <code>Pipe</code> כמו בדוגמא: <code>{{ importPipe }}</code>,
+  <br> 2) להגדיר את השם של הpipe כמו בדוגמא: <code>{{ pipeName }}</code>,
+  <br> 3) בתוך הקלאס של הpipe הוסיפו את המתודה <code>transform</code> עם פרמטר אחד, הפרמטר זה הערך בתצוגה שעליו מבוצע הpipe,
+  <br> 4) לרשום את הpipe במודול בdeclartions property, 
+</p>
+<p>דרך הcli הנ"ל נוצרים אוטומטית הקלידו את הפקודה הבאה: <span class='cmd'>ng g p pipe-name</span></p>
+<p>בדוגמא הבאה נציג pipe שמכפיל את הערך בתצוגה כפול 2:</p>
+<app-complate-example [card]='pipeCustom' example='https://stackblitz.com/edit/angular-pipe-custom?file=app/app.component.ts' download='pipe-pipe-custom.zip'></app-complate-example>
+
+<h2>pipe בngFor</h2>
+<p>
+  ניתן לשלב pipe בngFor כך שיובצע על כל ערך במערך,
+  <br> בתצוגה זה צריך להראות כך: <code>{{ ngFor }}</code>,
+  <br> ובקוד של הpipe צריך לעשות לולאה על הפרמטר שבתוכה נעשים הפעולות על התאים שבמערך כמו בדוגמא הבאה:
+</p>
+<app-complate-example [card]='ngForComplate' example='https://stackblitz.com/edit/pipe-ngfor?file=app/app.component.ts' download='pipe-ngfor.zip'></app-complate-example>
+
+<h2>pipe binding</h2>
+<p>
+  pipe יופעל כל פעם שיש שינוי בערך שניתן לו, כמו שלדוגמא אם נשנה את הערך בקוד הpipe יבוצע עליו שוב כמו בדוגמא הבאה:
+</p>
+<app-complate-example [card]='binding' example='https://stackblitz.com/edit/pipe-binding?file=app/app.component.ts' download='pipe-binding.zip'></app-complate-example>
+
+<h2>pure</h2>
+<p>
+  pipe בצורה הרגילה לא יכול לזהת refernce אלא רק primitive זה אומר שהוא יזהה שינוי בstring number וboolean אבל לא object, 
+  <br> הברירת מחדל בpipe זה שהוא מופעל כל פעם שהערך שניתן לו משתנה כמו בדוגמא למעלה, אפשר להגדיר שהpipe יופעל כל כמה מילי שניות וכך לפתור את הבעיה של הזיהוי עם הrefernce, המצב הזה נקרא impure,
+  <br> ההגדרה נעשית על ידי הוספת property בשם pure עם הערך false למתודה pipe כמו בדוגמא הבאה: <code>{{ pure }}</code>,
+  <br> בדוגמא הבאה נציג שתי pipe שמקבלים object ואחד יהיה מוגדר במצב impure:
+</p>
+<app-complate-example [card]='pureComplate' example='https://stackblitz.com/edit/pipe-pure?file=app/app.component.ts' download='pipe-pure.zip'></app-complate-example>
+

@@ -1,0 +1,155 @@
+<app-overview></app-overview>
+<p>לאנגולר יש כלים ליצור בקלות אנימיציה ולהגדיר אותה בדיוק כמו שמעוניינים</p>
+
+<p>
+  דבר ראשון יש לייבא את המודול <code>BrowserAnimationsModule</code> לקלאס מודול כמו בדוגמא: <code>{{ importAnimation }}</code>,
+  <br>ודבר שני יש לייבא לcomponent שבו עושים אנימציה את הקלאסים הבאים: <code>{{ importClasses }}</code>,
+</p>
+
+<h2>סקירה כללית</h2>
+<p>
+  את האנימציות של אנגולר מגדירים במתודה <code>@component</code> בproperty <code>animations</code>, דוגמא:,
+  <app-card [text]='property'></app-card>
+  אנימציה זה למעשה כמה styles שמופעלים אחד אחרי השני, בשביל להגדיר אנימציה צריך להגדיר ארבעה דברים: 
+</p>
+<ol>
+  <li><b>מיקום - </b>צריך להגדיר directive שהוספה שלו לתג html תפעיל על התג את האנימציה, המיקום מוגדר באמצעות המתודה <code>trigger</code>,</li>
+  <li><b>סיטואציה - </b>צריך להגדיר באיזה סיטואציה תופעל האנימציה למשל כשהתג נוצר או נמחק, הסיטואציה מוגדרת באמצעות המתודה <code>transition</code>,</li>
+  <li><b>אורך - </b>צריך להגדיר כמה זמן יקח כל האנימציה, האורך מוגדר באמצעות המתודה <code>animate</code>,</li>
+  <li><b>style - </b>צריך להגדיר את הstyles שיישתנו במהלך האנימציה, הstyles מוגדר באמצעות המתודה <code>animate</code>,</li>
+</ol>
+
+<h2>trigger</h2>
+<p>
+  המתודה <code>trigger</code> מגדירה את השם של הdirective שמפעיל את האנימציה,
+  <br> המתודה <code>trigger</code> נכתבת בתוך הproperty <code>animations</code> כמו בדוגמא: <code>animattion : [ trigger() ]</code>,
+  <br> המתודה <code>trigger</code> מקבלת שני פרמטרים:
+</p>
+<ol>
+  <li>השם של הdirective, יש לכתוב אותו כstring,</li>
+  <li>מערך של המתודות <code>transition</code>,</li>
+</ol>
+<p>דוגמא: <code>trigger('triggerName', [])</code>,</p>
+<p>את הdirective שנוצר יש להוסיף לתג html בתוך סוגריים מרובעות ואחרי <code>@</code>, דוגמא: <code>{{ trigger }}</code></p>
+
+<h2>transition</h2>
+<p>
+  המתודה <code>transition</code> מגדירה את הסיטואציה שמפעילה את האנימציה,
+  <br> המתודה <code>transition</code> נכתבת בתוך המתודה <code>trigger</code> כמו בדוגמא: <code>trigger( 'triggerName', [ transition() ] )</code>,
+  <br> המתודה <code>transition</code> מקבלת שני פרמטרים:
+</p>
+<ol>
+  <li>הסיטואציה שבה תופעל האנימציה, הסיטואציה נכתבת כstring,</li>
+  <li>את המתודה <code>animate</code>,</li>
+</ol>
+<p>רשימה של הסיטואציות הבסיסיות:</p>
+<ol>
+  <li><b>enter: - </b>מגדיר שהאנימציה תופעל כשהתג נוצר,</li>
+  <li><b>leave: - </b>מגדיר שהאנימציה תופעל כשהתג נמחק,</li>
+  <li><b>* <= * - </b> מגדיר שהאנימציה תופעל כשהתג נוצר או נמחק או כשהערך שלו משתנה (הרחבה בהמשך),</li>
+</ol>
+<p>דוגמא למתודה <code>transition</code>: <code>transition(':enter', animate() )</code>,</p>
+
+<h2>animate</h2>
+<p>
+  המתודה <code>animate</code> מגדירה את האורך של הזמן של האנימציה,
+  <br> המתודה <code>animate</code> נכתבת בתוך המתודה <code>transition</code> כמו בדוגמא: <code>transition(':enter', animate())</code>,
+  <br> המתודה <code>animate</code> מקבלת שני פרמטרים:
+</p>
+<ol>
+  <li>אורך הזמן של האנימציה, הסיטואציה נכתבת כstring,</li>
+  <li>את המתודה <code>style</code>,</li>
+</ol>
+<p>הגדרה של הזמן נעשית על ידי מספר שאחריו האות <code>s</code> בשביל לציין שזה שניות או <code>ms</code> בשביל לציין שזה מילי שניות, דוגמא: <code>'500ms'</code>,</p>
+<p>דוגמא למתודה <code>animate</code>: <code>animate('2s', style() )</code>,</p>
+
+<h2>style</h2>
+<p>
+  המתודה <code>style</code> מגדירה את הסטייל שישתנה באנימציה,
+  <br> המתודה <code>style</code> נכתבת בתוך המתודה <code>animate</code> כמו בדוגמא: <code>animate('500ms', style())</code>,
+  <br> המתודה <code>style</code> מקבלת פרמטר אחד, הפרמטר זה אובייקט שהpropertys שלו זה css והערכים שלהם,
+</p>
+<p>דוגמא למתודה <code>style</code>: <code>{{ style }}</code>,</p>
+
+<p>דוגמא לאנימציה בסיסית:</p>
+
+<span class='example'><button *ngIf='show' [@simple]>דוגמא</button></span>
+
+<app-complate-example [card]='animateComplate' example='https://stackblitz.com/edit/angular-animation-simple?file=src/app/app.component.ts' download='angular-animation-simple.zip'></app-complate-example>
+
+<h4>אפשרויות נוספות</h4>
+<ul>
+  <li>
+    <p>
+      ניתן להכניס למתודה <code>trigger</code> מערך של מתודות <code>transition</code>,
+      <br> דוגמא: <code>trigger( 'triggerName', [ transition(), transition() ] )</code>,
+      <br> זה יעיל מתי שצריך לאותו תג להגדיר אנימציות שונות לסיטואציות שונות,
+    </p>
+    <span class='example'><button *ngIf='showLaeve' [@transtionsMulti]>דוגמא</button></span>
+    <app-complate-example example='https://stackblitz.com/edit/angular-animation-transition-array?file=src/app/app.component.ts' download='angular-animation-transition-array.zip'></app-complate-example>
+  </li>
+  <li>
+    <p>
+      ניתן להגדיר את הstyles שבו תתחיל האנימציה, עושים זאת על ידי הכנסה למתודה <code>transition</code> מערך שיכיל את את המתודה <code>style</code> ואחריו את המתודה <code>animate</code>, 
+      <br> דוגמא: <code>transition( ':enter', [style(), animate()] )</code>,
+    </p>
+    <span class='example'><button *ngIf='show3' [@transtionStyle]>דוגמא</button></span>
+    <app-complate-example example='https://stackblitz.com/edit/angular-transition-style?file=src/app/app.component.ts' download='angular-transition-style.zip'></app-complate-example>
+  </li>
+  <li>
+    <p>
+      ניתן להגדיר כמה מתודות <code>animate</code> שיבצעו אנימציה אחד אחרי השני,
+      <br> עושים זאת על ידי הכנסה של מערך של המתודות <code>animate</code>,
+      <br> דוגמא: <code>transition( ':enter', [ animate(), animate() ] )</code>,
+    </p>
+    <span class='example'><button *ngIf='show3' [@transtionAnimate]>דוגמא</button></span>
+    <app-complate-example example='https://stackblitz.com/edit/angular-transtion-animate-array?file=src/app/app.component.ts' download='angular-transtion-animate-array.zip'></app-complate-example>
+  </li>
+  <li>
+    <p>
+      אפשר להגדיר שהאנימציה תבוצע בעיכוב של זמן מסויים,
+      <br> עושים זאת על ידי הוספה של זמן נוסף בפטרמטר הראשון של המתודה <code>animate</code>,
+      <br> דוגמא: <code>animate('1s 1s', style()</code>,
+    </p>
+    <span class='example'><button *ngIf='show2' [@delay]>דוגמא</button></span>
+    <app-complate-example example='https://stackblitz.com/edit/angular-animate-delay?file=src/app/app.component.ts' download='angular-transtion-animate-delay.zip'></app-complate-example>
+  </li>
+</ul>
+
+<h2>ease</h2>
+<p>
+  אפשר להגדיר שהמהירות של האנימציה תשתנה בתחילתה או בסופה,
+  <br> עושים זאת באמצעות המתודה <code>animate</code> על ידי שמוסיפים לפרמטר הראשון את המילה <code>ease</code>,
+  דונמא: <code>{{ ease }}</code>
+  <code>ease</code> קיים בכמה צורות: 
+</p>
+<ol>
+  <li>
+    <b>ease-in - </b>האנימציה מתחילה באיטיות, 
+     <br> דוגמא: <button *ngIf='show3' [@in]>דוגמא</button>
+  </li>
+  <li>
+    <b>ease-out - </b>האנימציה מסתיימת באיטיות, 
+     <br> דוגמא: <button *ngIf='show3' [@out]>דוגמא</button>
+  </li>
+  <li>
+    <b>ease-in-out - </b>האנימציה מתחילה ומסתיימת באיטיות, 
+     <br> דוגמא: <button *ngIf='show3' [@outIn]>דוגמא</button>
+  </li>
+  <li>
+    <b>ללא - </b>אנימציה רגילה, 
+     <br> דוגמא: <button *ngIf='show3' [@noEase]>דוגמא</button>
+  </li>
+</ol>
+<app-complate-example example='https://stackblitz.com/edit/angular-animate-ease?file=src/app/app.component.ts' download='angular-transtion-animate-ease.zip'></app-complate-example>
+
+<h2>סיטואציה - הרחבה</h2>
+<p>
+  סיטואציה ניתן להגדיר בשתי אפשרויות, האחת זה על ידי יצירה או מחיקה של האלמנט לדוגמא באמצעות <code>*ngIf</code> כמו כל הדוגמאות למעלה, והאפשרות השניה זה ליצור סיטואציה שישתנה הערך של <code>trigger</code>,
+  <br> <code>trigger</code> מקבל ערך באלמנט שבו הוא מוגדר לדוגמא: <code>{{ valueInTrigger }}</code>,
+  <br> במתודה <code>transition</code> מוגדרת הסיטואציה כך: <code>value1 => value2 </code> שזה אומר שהאנימציה תפעל בסיטואציה שהערך של ה<code>trigger</code> ישתנה מ<code>value1</code> ל<code>value2</code>,    
+  <br> אם כותבים את הסיטואציה כך: <code>value1 <=> value2</code> זה אומר שהאנימציה תפעל כשהערך של ה<code>trigger</code> ישתנה מערך אחד לשני ולהפך,
+  <br> אם כותבים את הסיטואציה כך: <code>* <=> *</code> זה אומר שהאנימציה תפעל כשהערך של ה<code>trigger</code> ישתנה ולא משנה מאיזה ערך לאיזה ערך,
+  <br> אם כותבים את הסיטואציה כך: <code>* => value</code> זה אומר שהאנימציה תפעל כשהערך של ה<code>trigger</code> ישתנה ל<code>value</code> ולא משנה מאיזה ערך,
+</p>
+<app-complate-example [card]='valueInTriggerComplate' example='https://stackblitz.com/edit/angular-animation-transtion-value?file=src/app/app.component.ts' download='angular-animation-transtion-value.zip'></app-complate-example>

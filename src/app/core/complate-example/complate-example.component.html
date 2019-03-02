@@ -1,0 +1,6 @@
+<div class="complate-example">
+    <app-example-title *ngIf='card'></app-example-title>
+    <app-card *ngIf='card' [text]="card"></app-card>
+    <app-example *ngIf='example' [href]='example'></app-example>
+    <app-btn-dwonload [href]='"assets/examples/" + download'></app-btn-dwonload>
+</div>

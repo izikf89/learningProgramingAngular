@@ -1,0 +1,64 @@
+<p>בפרק זה יהיה הרחבה של האפשרויות של הרישום של service בproviders property,</p>
+
+<h2>הקדמה</h2>
+<p>
+  כשמגדירים משתנה כמו זה: <code>let myVariable = 'value'</code> אנחנו מגדירים משתנה שמיוצג על ידי המילה <code>myVariable</code> והערך שלו זה <code>value</code>,
+  <br> כשרושמים קלאס כservice כמו זה: <code>providers: [ MyClass ]</code> עושים אותו דבר, אנחנו מגדירים service שמיוצג על ידי המילה <code>MyClass</code> (בשפת אנגולר זה נקרא token) והערך שלו זה הקלאס <code>MyClass</code>,
+  <br> למעשה צורת הרישום הרגילה כמו זה: <code>providers: [ MyClass ]</code> היא קיצור של הרישום הזה: <code>{{ providersObject }}</code>, 
+  הproviders property הוא המילה שתייצג את הservice כשנרצה להזריק אותו במתודה <code>constructor</code>, והuseClass property זה הערך שיחזיק הservice,
+</p>
+
+<h2>useClass</h2>
+<p>
+  <code>useClass</code> מגדיר את הקלאס שיהיה הservice, דוגמא: <code>{{ useClass }}</code>
+  <br> ניתן להשתמש בuseClass גם בservice שלא נרשם בproviders property,
+  <br> useClass יוצר מופע חדש של הservice המחליף כמו שאפשר לראות בדוגמא הבאה:
+</p>
+<app-complate-example [card]='useClassComplate' example='https://stackblitz.com/edit/angular-useclass?file=src/app/app.module.ts' download='angular-useclass.zip' ></app-complate-example>
+
+<h2>useExisting</h2>
+<p>
+  <code>useExisting</code> יוצר הפניה לservice שכבר קיים, דוגמא: <code>{{ useExisting }}</code>
+  <br> לא ניתן להשתמש useExisting בservice שלא נרשם בproviders property,
+  <br> useExisting מוחק מהזיכרון של המחשב את הservice המוחלף ולא יוצר מופע חדש אלא רק הפניה (refernce) לservice המחליף כמו שאפשר לראות בדוגמא הבאה: 
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-use-existing?file=src/app/app.module.ts' download='angular-use-existing.zip' ></app-complate-example>
+
+<h2>useValue</h2>
+<p>
+  service יכול להיות גם משתנה שאינו class, הבעיה היא שבproviders property אפשר להכניס רק class,
+  הפיתרון לבעיה הנ"ל זה להשתמש בuseValue שזה מקבילה של useClass רק שuseValue מיועד למשתנים שאינם class,
+  <br> דוגמא: <code>{{ useValue }}</code>,
+</p>
+<app-complate-example [card]='useValueComplate' example='https://stackblitz.com/edit/angular-usevalue-simple?file=src/app/app.component.ts' download='angular-usevalue-simple.zip'></app-complate-example>
+
+<h2>forwardRef</h2>
+<p>
+  המתודה <code>forwardRef</code> מיועדת למקרה שרשמנו בproviders property איזה service שעדיין לא נוצר, 
+  <br> יש לייבא את המתודה <code>forwardRef</code> כמו בדוגמא: <code>{{ importForwardRef }}</code>,
+  <br> השימוש במתודה <code>forwardRef</code> כמו בדוגמא: <code>{{ forwardRef }}</code>,
+</p>
+<app-complate-example [card]='forwardRefComplate' example='https://stackblitz.com/edit/angular-forwardref-simple?file=src/app/app.component.ts' download='angular-forwardref-simple.zip'></app-complate-example>
+
+<h2>factory</h2>
+<p>
+  factory זה service שעבר יצירה עם <code>constructor</code>, (למתכנתי javascript שלא מכירים את הדבר הזה ניתן למצוא מידע <a href='https://www.w3schools.com/js/js_object_constructors.asp'>פה</a>),
+</p>
+<p>
+  הכתיבה של <code>factory</code> כך: 
+  <br> בproviders property מכניסים אובייקט עם שני property, הproperty הראשון זה <code>provide</code> והערך שלו זה הservice שעושים עליו <code>constructor</code>,
+  <br> הproperty נקרא <code>useFactory</code> והערך שלו זה מתודה שמחזירה <code>constructor</code> על הservice,
+  <br> דוגמא: <code>{{ factory }}</code>,
+</p>
+<app-complate-example [card]='factoryComplate' example='https://stackblitz.com/edit/angular-factory?file=src/app/app.component.ts' download='angular-factory.zip'></app-complate-example>
+
+<h2>deps</h2>
+<p>אם יש service שרשום בתוך הservice שעושים עליו <code>factory</code> צריך להשתמש בproperty <code>deps</code> בצורה הבאה:</p>
+<p>
+  1)באובייקט שמכניסים לproviders property מוסיפים property בשם <code>deps</code>, הערך של <code>deps</code> זה מערך שבו הservice שיש בservice שב<code>factory</code>,
+  <br> 2) במתודה שבproperty <code>useFactory</code> מוסיפים פרמטר שמקבלים את הservice הנוספים 
+  <br> 3) מוסיפים את הפרמטרים ל<code>constructor</code>
+  <br> דוגמא: <code>{{ deps }}</code>,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-factory-deps?file=src/app/app.component.ts' download='angular-factory-deps.zip'></app-complate-example>
+

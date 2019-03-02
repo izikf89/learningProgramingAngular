@@ -1,0 +1,174 @@
+<app-overview></app-overview>
+<p>לאנגולר יש יכולת לנהל את כל דפי האתר מהצד של הלקוח (front-end)</p>
+
+<h4>routing - מה זה? ולמה צריך את זה?</h4>
+<p>
+  באתר רגיל לשרת יש שתי תפקידים אחד זה לשלוח את הדפי html וקבצי css וjavascript, והשני זה לענות לajax שזה אומר לשלוח מידע ספציפי,
+  <br> בדרך כלל הדבר שהכי מאט אתרים לעלות זה תקשורת, ולכן כל ניווט באתר לדף אחר גורם להמתנה ניכרת עד שהדף עולה,
+  <br> באנגולר חוסכים מהשרת את התפקיד של לשלוח דפים ורק בפעם הראשונה נשלחים כל הדפים, ובאמצעות הrouting אפשר לנווט בתוך האתר והrouting ישלח component בהתאם לכתובת,
+  <br> התכונה הזאת הופכת את האתר למהיר בצורה מאוד משמעותית כיון שאין לצורך הניווט שום תקשורת חיצונית,
+  <br> אם האתר הוא האתר גדול ולשלוח בפעם הראשונה את כל האתר יגרום לכך שיקח הרבה זמן עד שהאתר יעלה, יש אפשרות שנקראת lazy-loading שמאפשרת לחלק את האתר לחתיכות והחלק שאליו ניווטו בפתיחת האתר ישלח ראשון ושאר החלקים יטענו ברקע רק אחרי שהחלק הרלוונטי סיים להיטען,
+  <br> יש את החיסרון של seo בשיטה הזאת, מכיון שהנושא לא פשוט אני לא יכנס אליו, בכל מקרה יש את הפיתרון של universal, ליותר פרטים <a href='https://angular.io/guide/universal'>כנסו לכאן</a>, (אם לא הבנתם את השורה הזאת כנראה שזה לא רלוונטי לגביכם).
+</p>
+
+<app-syntex></app-syntex>
+<p>
+  1) מוסיפים את התג <code>{{ tag }}</code>, 
+</p>
+<p>
+  2) יוצרים קובץ מודול חדש כך:
+  <br> a) מייבאים לקובץ שבו יהיה המודול החדש את הייבוא הבא: <code>{{ import }}</code>,
+  <br> b) רושמים במודול החדש בproperty <code>imports</code> את מודול הבא כך: <code>RouterModule.forRoot()</code>,
+  <br> c) בproperty <code>exports</code> מכניסים את הקלאס <code>RouterModule</code>,
+  <br> d) יוצרים לפני המודול את <code>const</code> ומגדירים לו כtype את הקלאס <code>Ruotes</code> והוא מקבל מערך ריק, דוגמא: <code>const routes: Routes = []</code>,
+  <br> בשלב הזה המודול החדש אמור להראות כך: 
+  <app-card [text]='module'></app-card>
+</p>
+
+<p>
+  3) רושמים את הקלאס של המודול החדש בקלאס מודול הראשי בproperty <code>imports</code>,
+</p>
+
+<p class='alert alert-success'>אם יוצרים את הrouting דרך הcli אז הcli מבצע את יצירת המודול והרישום שלו במודול הראשי, הפקודה היא <span class='cmd'>ng g m nameRouting --routing</span></p>
+
+<p>
+  הראוטר הוגדר, עכשיו צריך להגדיר ניווט, שזה אומר שמגדירים כתובת באתר שפניה אליה תביא להופעה של component מסוים בתג <code>router-outlet</code>,
+</p>
+
+<h4>הגדרת path</h4>
+<p>
+  ניגשים ל<code>const</code> שהגדרנו לפני המודול החדש ומוסיפים למערך שלו אובייקט, 
+  <br> באובייקט יהיה שתי keys, הראשון נקרא <code>path</code> שבו מגדירים את הכתובת,
+   והשני זה <code>component</code> שבו מכניסים את הקלאס של הcomponent שאנחנו מעוניינים שיופיע, דוגמא: <code>{{ path }}</code>,
+</p>
+
+<p>בדוגמא הבאה יש ראוטר שיש לו שתי כתובות שבכל אחד מהם הראוטר טוען component אחר: </p>
+<app-complate-example [card]='ruoting' example='https://stackblitz.com/edit/angular-routing-simple?file=app/app.component.ts' download='angular-routing-simple.zip'></app-complate-example>
+
+<p> בדוגמא החיה שימו לב לשורת הכתובת של הדף שהיא משתנית בהתאם לניווט, לדוגמא כשמנווטים לA שורת הכתובת היא <code>https://angular-routing-simple.stackblitz.io/A</code> כמו בתמונה: </p>
+<img src='assets\img\routing-url.png' />
+
+<h4>redirectTo</h4>
+<p>
+  ניתן להגדיר שבפניה לכתובת אחת נועבר לכתובת אחרת,
+  <br> במקום הproperty <code>component</code> נכתוב את הproperty <code>redirectTo</code> ונכתוב את הכתובת שאליה אנו מעוניינים להפנות, דוגמא: <code>{{ redirectTo }}</code>,
+</p>
+<app-complate-example [card]='redirectToComplate' example='https://stackblitz.com/edit/angular-redirectto?file=app/app.component.ts' download='angular-redirectto.zip'></app-complate-example>
+
+<p class='margin-top alert alert-warning'>הערה: ניתן לעשות הפניה אחת בלבד, לא ניתן לעשות הפניה להפניה נוספת , לדוגמא:</p>
+<app-card [text]='twiceRedirectTo'></app-card>
+
+<h4> הכתובת ''</h4>
+<p>
+  אם לא כותבים בproperty path כלום רק string ריק אז כל גלישה לאתר ללא כתובת פנימית תגיעה אליו,
+  <br> במצב כזה חובה להוסיף את הproperty הבא <code>pathMatch:'full'</code>, דוגמא: <code>{{ pathMatch }}</code>
+  <br> הproperty הזה מגדיר שהניווט יהיה רק אם הכתובת תואמת לחלוטין את הכתובת שהוגדרה, אם זה לא מוגדר כך הניווט לכל כתובת יכנס לpath הזה,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-pathmatch?file=app/app.component.ts' download='angular-pathmatch.zip'></app-complate-example>
+
+<h4> הכתובת **</h4>
+<p>
+  ניתן להגדיר כתובת שאליה ינווטו כל הניווטים, הרווח בכזה כתובת שהיא תתפוס את כל הניווטים השגואים,
+  <br> הגדרה של כתובת כזאת היא על ידי כתיבה בproperty <code>path</code> את הכתובת <code>**</code>, דוגמא: <code>{{ specialPath }}</code>,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-pathmatch?file=app/app.component.ts' download='angular-pathmatch.zip'></app-complate-example><p>
+  חובה לשים את הכתובת הזאת בסוף המערך של הכתובות,
+  <br> הסבר: כשמנווטים לכתובת הrouting עובר על המערך של הכתובות לפי הסדר שנכתבו ובמידה והוא מוצא התאמה לכתובת שנכתבה הוא מפסיק לעבור על המערך ומנווט אל הכתובת שמצא, לכן אם יהיה שתי כתובות זהות הrouting תמיד ינווט אל הכתובת שנכתבה ראשונה, לכן עם הראוטר יגיע לכתובת ** הוא מייד ינווט אליה
+</p>
+
+<h4>parameter</h4>
+<p>
+  אפשר להגדיר בכתובת שהיא צריכה לקבל פרמטר,
+</p>
+<h6>הסבר על פרמטרים</h6>
+<p>
+  <br> הסבר קצר על פרמטרים: פניה לדף אינטרנט נעשית על ידי שליחת כתובת, לפעמים אנחנו מעוניינים להעביר לדף מידע, אפשר לשלוח מידע על ידי שמוסיפים משתנים לכתובת,
+  <br> יש שני סוגי פרמטרים, אחד זה <code>queryParams</code> שזה פרמטרים שמתווספים לשורת הכתובת אחרי התו <code>?</code>, הם מגיעים בצורה של <code>key</code> ו<code>value</code> שמופרדים על ידי התו <code>=</code>, 
+  הפרמטרים מופרדים אחד מהשני על ידי התו <code>&</code>, דוגמא ל<code>queryParams</code>: <code>http://url?parameter1=value1&parameter2=value2</code>,
+  <br> הסוג השני של פרמטרים זה <code>params</code> שזה ערך אחד בלבד שמופרד מהכתובת בתו <code>/</code>, דוגמא: <code>http://url/value</code>,
+  <br> פרמטר מסוג params צריך להגדיר מראש בראוטינג, queryParams לא צריך להגדיר מראש, 
+  <br> במתודה post יש סוג אחר של שליחת מידע שלא נעשה דרך הכתובת ונקרא <code>body</code>,
+  <br> params ו queryParams אפשר פשוט להוסיף בשורת הכתובת, ל body צריך מתודה שתכניס אותו לajax,
+</p>
+
+<h6>הגדרה של פרמטר בשורת הכתובת</h6>
+<p>
+  מוסיפים בproperty <code>path</code> אחרי הכתובת את התווים <code>/:</code> ואחרי זה את השם של הפרמטר, זה נראה כך: <code>{{ pathParameter }}</code>,
+</p>
+
+<h4>routerLink</h4>
+<p>
+  בתג <code>a</code> במקום הproperty <code>href</code> נשתמש לניווט בתוך האתר בproperty <code>routerLink</code>, 
+  <br> יש לroutrLink שני יתרונות, אחד זה שלחיצה עליו לא תפתח מחדש את כל האתר אלא רק את הcomponent שהראוטר שינה, והשני זה שאפשר להשתמש בproperty אחרים מאנגולר שיש לתג a,
+</p>
+
+<h5>routerLinkActive</h5>
+<p>
+   property של התג <code>a</code> שמקבל קלאסים של css ומפעיל אותם כשהכתובת שהתג המארח מנווט אליה נפתחת, דוגמא: <code>{{ routerLinkActive }}</code>
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-routerlinkactive?file=app/app.component.ts' download='angular-routerlinkactive.zip'></app-complate-example>
+
+<h5>queryParams</h5>
+<p>אפשר לשלוח פרמטרים בלינק  על ידי הוספת של הproperty <code>queryParams</code>, דוגמא: <code>{{ queryParams }}</code>, </p>
+
+<h4>ניווט מהסקריפט</h4>
+<p>
+  ניתן לנווט על ידי פקודה בjs ולגשת לפרמטרים שנשלחו לכתובת הנוכחית,
+  <br> דבר ראשון להוסיף את היבוא הבא: <code>{{ importParameter }}</code>,
+  <br> ולאחר מכן לרשום במתודה constructor כך: <code>{{ ConstructorParameter }}</code>,
+</p>
+
+<h6>ניווט</h6>
+<p>
+   ניווט נעשה כמו בדוגמא הבאה: <code>{{ navigation }}</code>,
+   <br> ניתן לנווט רק בכתובת שהוגדרו בראוטר של אנגולר,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/angular-navigate?file=app/app.component.ts' download='angular-navigate.zip'></app-complate-example>
+
+<h6> שליחת queryParams מהסקריפט</h6>
+<p>
+  שליחה של queryParams מהסקריפט נעשית כמו בדוגמא: <code>{{ sendQueryParams }}</code>,
+</p>
+
+<h6> שליחת params מהסקריפט</h6>
+<p>
+  שליחה של params מהסקריפט נעשית כמו בדוגמא: <code>{{ sendParams }}</code>,
+</p>
+
+<h4> גישה לפרמטרים ולכתובת</h4>
+<h6>גישה לכל הפרמטרים</h6>
+<p>
+  <b>queryParams:</b> <code>this.route.snapshot.queryParams;</code>,
+  <br><b>params:</b> <code>this.route.snapshot.params;</code>,
+</p>
+
+<h6>גישה לניווט האחרון</h6>
+<p>
+  <code>this.route.snapshot.url.join('');</code>,
+</p>
+
+<h6>גישה לכתובת ביחד עם הפרמטרים</h6>
+<p>
+  <code>this.router.url</code>,
+</p>
+
+<p>בקישור הבא יש את כל הגישות הנ"ל,</p>
+
+<app-complate-example example='https://stackblitz.com/edit/angular6-get-parameter?file=app/app.component.ts' download='angular6-get-parameter.zip'></app-complate-example>
+<h4>data</h4>
+<p>
+  כשמגדירים כתובת בראוטר ניתן להוסיף מידע שישלח הראוטר בכל פעם שמנווטים לכתובת,
+  <br> הגדרה בראוטר: מוסיפים property בשם <code>data</code> ומכניסים לו אובייקט, דוגמא: <code>{{ data }}</code>,
+</p>
+<app-complate-example example='https://stackblitz.com/edit/router-data?file=app/app.component.ts' download='router-data.zip'></app-complate-example>
+<p class='alert alert-warning line-space'>הערה: לdata ולparams אפשר לגשת רק מהcomponent שאליו ניווטו, בניגוד לqueryParams שאליו אפשר לגשת מכל component, אפשר לראות את ההבדל הזה בדוגמאות.</p>
+
+<h4>multi ruter</h4>
+<p>
+  אפשר ליצור כמה קלאסים של מודול עם ראוטר, 
+  <br> יוצרים קלאס מודול נוסף ורושמים אותו במודול הראשי ויוצרים מודול ראוטר חדש ורושמים אותו במודול הנוסף,
+  <br> יש הבדל אחד: בראוטר הראשי משתמשים במתודה <code>forRoot</code> ובכל שאר הראוטרים שנוסיף נשתמש במתודה <code>forChild</code>,
+  <br> לראוטרים יש קדימות לפי הרישום למודול ולכן אם יש בשני ראורטרים כתובת זהה, הראוטר הראשון שנרשם במודול אליו יפנה הראוטר, 
+</p>
+
+<app-complate-example example='https://stackblitz.com/edit/angular-multi-router?file=app/app.component.ts' download='angular-multi-router.zip'></app-complate-example>

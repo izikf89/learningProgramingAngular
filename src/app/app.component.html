@@ -1,0 +1,24 @@
+<app-header></app-header>
+<mat-sidenav-container class="example-container" >
+    <mat-sidenav  [hidden]='!smallScreen' #sidenav mode="over" position='end' >
+        <app-nav-list class="list-page"></app-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button [hidden]='!smallScreen' mat-button (click)="sidenav.toggle()" class='btn-menu'><i class="material-icons">menu</i></button>
+        <div class="up-container" [ngClass]='{"large-screen": !smallScreen}'>
+            <app-nav-list [hidden]='smallScreen' class=" list-page"></app-nav-list>
+            <div class="container">
+                <div id='btn-top' class='btn-top'>
+                    <button class='btn-back-top' mat-raised-button color='warn' *ngIf=btnBackName [routerLink]=btnBackLink>{{ btnBackName }}</button>
+                    <button class='btn-next-top btn-green' mat-raised-button color='green' *ngIf=btnNextName [routerLink]=btnNextLink>{{ btnNextName }}</button>
+                    <h1 class="title">{{ title }}</h1>
+                </div>
+                <div class='router'>
+                    <router-outlet></router-outlet>
+                </div>
+                <button mat-raised-button color='warn' *ngIf=btnBackName [routerLink]=btnBackLink>{{ btnBackName }}</button>
+                <button mat-raised-button color='green' *ngIf=btnNextName [routerLink]=btnNextLink class='btn-next-bottom btn-green'>{{ btnNextName }}</button>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

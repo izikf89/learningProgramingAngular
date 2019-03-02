@@ -1,0 +1,23 @@
+<app-overview></app-overview>
+<p>
+  בכל ניווט של אנגולר הראוטר משחרר כמה events במהלך הניווט שמעדכנים מה הסטטוס של הניווט,
+</p>
+
+<h6>רשימת האירועים:</h6>
+<ul>
+  <li>NavigationStart - כשהניווט מתחיל,</li>
+  <li>RoutesRecognized - כשהראוטר מזהה את הכתובת,</li>
+  <li>RouteConfigLoadStart - לפני שמתחיל לטעון lazy loading,</li>
+  <li>RouteConfigLoadEnd - אחרי טעינה של lazy loading,</li>
+  <li>NavigationEnd - כשהניווט מסתיים בהצלחה,</li>
+  <li>NavigationCancel - כשפונקציה מסוג guard חסמה את הניווט,</li>
+  <li>NavigationError - כשהניווט נכשל,</li>
+</ul>
+
+<app-syntex></app-syntex>
+<p>
+  1) דבר ראשון מייבאים את הservice <code>Router</code> וקלאס של הevent שאנחנו מעוניינים, לדוגמא: <code>{{ import }}</code>,
+  <br> את הservice <code>Router</code> רושמים במתודה constructor, דוגמא: <code>{{ registers }}</code>,
+  <br> 2) הservice Router מחזיק property בשם <code>event</code> שהוא אובייקט מסוג observable והוא מתעדכן באירועים של הראוטר, יש להירשם אליו באמצעות המתודה subscribe ולהשוות בין האירועים לאירוע המבוקש, 
+</p>
+<app-complate-example [card]='subscribe' example='https://stackblitz.com/edit/angular-router-event?file=app/app.component.ts' download='angular-router-event.zip'></app-complate-example>

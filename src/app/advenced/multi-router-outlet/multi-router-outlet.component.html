@@ -1,0 +1,22 @@
+<app-overview></app-overview>
+<p> ניתן ליצור כמה תגים שונים של <code>router-outlet</code></p>
+
+<app-syntex></app-syntex>
+<p>
+  מוסיפים תג <code>router-outlet</code> נוסף ומוסיפים לו את הattribute <code>name</code>, דוגמא: <code>{{ name }}</code>,
+  <br> בpath שלו נוסיף property בשם <code>outlet</code> עם הname שהגדרנו ב<code>router-outlet</code>, דוגמא: <code>{{ path }}</code>,
+</p>
+
+<h3>routerLink</h3>
+<p>routerLink לoutlet נכתב כך: <code> {{ routerLink }}</code>,</p>
+<app-complate-example [card]='routerLinkComplate' example='https://stackblitz.com/edit/angular-multi-router-outlet?file=app/app.component.ts' download='angular-multi-router-outlet.zip'></app-complate-example>
+<p> בurl הכתובת של הראוטר המישני נמצאת בתוך סוגריים כמו בתמונה הבאה:</p>
+<img src="assets/img/multi router outlet.PNG">
+
+<h3>גישה עם script</h3>
+<p> גישה דרך הscript נכתבת כך: <code> {{ script }}</code>,</p>
+<app-complate-example [card]='scriptComplate' example='https://stackblitz.com/edit/angular-multi-router-script?file=app/app.component.ts' download='angular-multi-router-script.zip'></app-complate-example>
+
+<h3>סגירה של router</h3>
+<p> אפשר לסגור את הראוטר המישני דרך הscript<code> {{ close }}</code>,</p>
+<app-complate-example [card]='closeComplate' example='https://stackblitz.com/edit/angular-multi-router-close?file=app/app.component.ts' download='angular-multi-router-close.zip'></app-complate-example>

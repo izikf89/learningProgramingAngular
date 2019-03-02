@@ -1,0 +1,19 @@
+<app-overview></app-overview>
+<p>
+  אפשר להוסיף דרך הסקריפט component שהוגדר מראש,
+</p>
+
+<app-syntex></app-syntex>
+<p>
+  1) נייבא את הקלאס <code>ComponentFactoryResolver</code> ואת הקלאס <code>ViewContainerRef</code> כמו בדוגמא: <code>{{ import }}</code>,
+  <br> 2) בקלאס מודול נרשום את הcomponent שאנחנו מעוניינים ליצור בproperty מיוחד שנקרא <code>entryComponents</code>, עדיין צריך לרשום את הcomponent בproperty declartions, המודול יראה כך:
+  <app-card [text]='module'></app-card>
+  <br> 3) כעת בסקריפט שאנחנו מעוניינים ליצור בו את הcomponent נרשום את הקלאסים הנ"ל במתודה <code>constructor</code> כמו בדוגמא: <code>{{ constructorMethod }}</code>,
+  <br> 4) כעת נהפוך את הcomponent לאלמנט על ידי שנכניס את הcomponent כפרמטר במתודה <code>cfr.resolveComponentFactory</code> כמו בדוגמא: <code>let newComponent = this.cfr.resolveComponentFactory(ComponentDynamic);</code>,
+  <br> 5) כעת ניצור את הcomponent על ידי שנכניס את האלמנט הנ"ל למתודה <code>vcr.createComponent</code> כמו בדוגמא: <code>this.vcr.createComponent(newComponent);</code>,
+</p>
+<app-complate-example [card]='complateExample' example='https://stackblitz.com/edit/angular-dynamic-component-simple?file=src/app/app.component.ts' download='component-dynamic.zip'></app-complate-example>
+
+<h4>מחיקה</h4>
+<p> מחיקה של הcomponent תעשה על ידי המתודה <code>this.vcr.clear();</code></p>
+

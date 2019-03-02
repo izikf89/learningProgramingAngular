@@ -1,0 +1,66 @@
+<app-overview></app-overview>
+<p>הכלים של אנגולר לform נותנים שליטה קלה על הערכים והvalidation שבform</p>
+
+<p>לאנגולר יש שני ארכיטקטורות לform:</p>
+<ul>
+  <li>template-driven -  והיא נעשית דרך הhtml והיא קלה יותר להגדרה אבל נותנת פחות אופציות,</li>
+  <li>reactive - נעשית בעיקר דרך typescript קצת יותר מורכבת להגדרה ונותנת שליטה מלאה ואופציות רחבות יותר,</li>
+</ul>
+
+<h2>template-driven</h2>
+<p>
+  1) חובה לרשום את המודול <code>FormsModule</code> בקלאס מודול,
+  <br> 2) יש ליצור hashtag בתג <code>form</code> שמקבל ערך <code>ngForm</code> , דוגמא <code>{{ ngForm }}</code> בשפה של אנגולר הhashtag הזה נקרא controller ובקיצור ctrl,
+  <br> 3) לכל input בform צריך להוסיף את הdirective <code>ngModel</code>, ולהגדיר <code>name</code> כמו בדוגמא: <code>{{ tdInput }}</code>,
+  <br> בתצוגה אפשר לגשת לערכים שבform באמצעות הctrl כמו בדוגמא <code>{{ tdValue }}</code>,
+  <br> אפשר לראות עם כל הinput בform הם validation באמצעות הctrl כמו בדוגמא <code>{{ tdValidation }}</code>,
+</p>
+<app-complate-example [card]='tdComplate' example='https://stackblitz.com/edit/form-template-driven?file=app/app.component.ts' download='form-template-driven.zip'></app-complate-example>
+
+<h2>reactive</h2>
+<p>
+  1) חובה לרשום את המודול <code>ReactiveFormsModule</code> בקלאס מודול,
+  <br> 2) בתוך התג <code>form</code> מוסיפים את הdirective <code>[formGroup]</code> בתוך סוגריים מרובעות, וצריך להגדיר לdirective שם כלשהו, התג צריך להראות כך: <code>{{ reactiveForm }}</code>,
+  <br> 3) כל תג <code>input</code> צריך להכיל את הdirective <code>formControlName</code> ומגדירים בו את השם של הinput, התג input צריך להראות כך: <code>{{ reactiveInput }}</code>,
+</p>
+
+<p> כעת צריך להגדיר את הform, ההגדרה יכולה להעשות על ידי שני קלאסים: <code>FormGroup</code> ו<code>FormBuilder</code>, להלן הפירוט:</p>
+
+<h4>FormGroup</h4>
+<p>
+  1) צריך לייבא לקובץ שבו נמצא הcompnent את הקלאסים הבאים: <code> {{ importReactive }}</code>,
+  <br> 2) בקלאס של הcompnent מגדירים כproperty את השם שהגדרנו לform, הproperty מקבל מופע חדש של הקלאס <code>FormGroup</code> שמקבל כערך object, זה נראה כך: <code>{{ reactiveFormGroup }}</code>,
+  <br> 3) באובייקט שמקבל <code>FormGroup</code> מגדירים את הinput שנמצאים בform, כל input שבform יוצרים כנגדו באובייקט שמקבל <code>FormGroup</code>  property שהשם שלו זה השם של <code>formControlName</code> שהוגדר בinput, הvlue של הproperty זה מופע חדש של הקלאס <code>FormControl</code>שמקבל שני פרמטרים, זה נראה כך: <code>{{ reactiveFormControl }}</code>,
+  <br> 4) הקלאס <code>FormControl</code> מקבל שני פרמטרים, הפרמטר הראשון זה הערך ברירת המחדל של הinput, הפרמטר השני זה מערך שבו מגדירים את הvalidation של הinput,
+  <br> המערך הנ"ל בנוי מpropperty של הקלאס <code>Validators</code>, כל validation שקיים מיוצג על ידי property בקלאס <code>Validators</code> כמו לדוגמא <code>required</code> כתוב במערך כך: <code>Validators.required</code>,
+  <br> ה<code>FormControl</code> אמור להראות כך: <code>{{ arrayFormControl }}</code>,
+</p>
+<app-complate-example [card]='reactive' example='https://stackblitz.com/edit/form-reactive-simple?file=app/app.component.ts' download='form-reactive-simple.zip'></app-complate-example>
+
+<h4>FormBuilder</h4>
+<p>
+  1) צריך לייבא לקובץ שבו נמצא הcompnent את הקלאסים הבאים: <code> {{ importFormBuilder }}</code>,
+  <br> 2) את הקלאס <code>FormBuilder</code> יש לרשום במתודה constructor כך: <code>{{ FormBuilderConstructor }}</code>,
+  <br> 3) בקלאס של הcompnent מגדירים כproperty את השם שהגדרנו לform, הproperty מקבל כערך את המתודה <code>group</code> שבFormBuilder עם פרמטר אובייקט, זה נראה כך: <code>{{ FormBuilderGroup }}</code>,
+  <br> 4) באובייקט שנכנס לפרמטר  של המתודה <code>group</code> מגדירים כproperty את הinput כמו שהוגדר בdirective formControlName, זה נראה כך: <code>FormBuilderProperty</code>,
+  <br> 5) הvalue שמקבל הproperty של האובייקט הנ"ל זה מערך, התא הראשון במערך מכיל את הערך ברירת המחדל של הinput, שאר הערכים זה הvalidation של הinput,
+  <br> המערך הנ"ל בנוי מpropperty של הקלאס <code>Validators</code>, כל validation שקיים מיוצג על ידי property בקלאס <code>Validators</code> כמו לדוגמא <code>required</code> כתוב במערך כך: <code>Validators.required</code>,
+  <br> ה<code>FormBuilder</code> אמור להראות כך: <code>{{ FormBuilderCmplate }}</code>,
+</p>
+<app-complate-example [card]='reactiveFormBuilder' example='https://stackblitz.com/edit/form-reactive-formbuilder?file=app/app.component.ts' download='form-reactive-formbuilder.zip'></app-complate-example>
+
+<h2>submit</h2>
+<p>
+  submit מוגדר בתג form כך: <code>{{ submitSimple }}</code>,
+  <br> submit בform רגיל אם לא כל השדות בform לא לפי הvalidation הכפתור submit יהיה במצב disabled, באגולר זה לא כך וצריך להגדיר זאת ידנית כך: <code>{{ submitDisabled }}</code>,
+</p>
+<app-complate-example [card]='submit' example='https://stackblitz.com/edit/form-submit-simple?file=app/app.component.ts' download='form-submit-simple.zip'></app-complate-example>
+
+<h2>form מקונן</h2>
+<p>ניתן להגדיר form מקונן בתוך form אחר בreactive בלבד, בFormGroup או בFormBuilder,</p>
+<p>
+  1) בתוך הform מגדירים form נוסף רק שבמקום התג form משתמשים בתג div, והdirctive שמוסיפים לו זה <code>formGroupName</code> במקום הdirective <code>[formGroup]</code>, כמו בדוגמא הבאה:
+</p>
+<app-card [text]='nestedHtml'></app-card>
+<p>2) בקלאס באובייקט שמגדירים בו את הinput, מוסיפים property כשם הform המקונן שהוגדר בdirective <code>formGroupName</code>, והvalue שלו זה הקלאס <code>FormGroup</code> או <code>FormBuilder</code></p>
+<app-complate-example [card]='nested' example='https://stackblitz.com/edit/form-nested?file=app/app.component.ts' download='form-nested.zip'></app-complate-example>

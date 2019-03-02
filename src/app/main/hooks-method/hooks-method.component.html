@@ -1,0 +1,73 @@
+<app-overview></app-overview>
+<p>
+  hooks method זה מתודות מובנות בcomponent ובdirective שמופעלות באופן אוטמטי על ידי event מסוימים 
+  <br> לדוגמא כשהקלאס נוצר מופעלת המתודה ngOnInint,
+</p>
+
+<p>
+  רשימת המתודות:
+  <br>1) <code>ngOnchanges</code>,    
+  <br>2) <code>ngOnInint</code>,
+  <br>3) <code>ngDoCheck</code>,
+  <br>4) <code>ngAfterContentInit</code>,
+  <br>5) <code>ngAfterContentChecked</code>,
+  <br>6) <code>ngAfterViewInit</code>,
+  <br>7) <code>ngAfterViewChecked</code>,
+  <br>8) <code>ngOnDestroy</code>,
+</p>
+
+<h2>ngOnchanges</h2>     
+<p>המתודה מופעלת כשיש שינוי בproperty של הקלאס</p>
+<h4>כללים</h4>
+<p>
+  1) המתודה הזאת פועלת רק בdirective,
+  <br> 2) המתודה מאזינה לpropeprty של הcomponent שמקושר לdirective על ידי input attribute,
+</p>
+<app-complate-example [card]='ngOnchanges' example='https://stackblitz.com/edit/ngonchange?file=app/app.component.ts' download='ngonchange.zip'></app-complate-example>
+
+<h4>SimpleChanges</h4>
+<p>
+  כשמתודה ngOnchanges מופעלת אפשר לגשת מתוכה לשלושה נתונים, אחד האם זה הפעם הראשונה שהמתודה מופעלת, השני מה הערך הנוכחי, והשלישי מה היה הערך הקודם,
+  <br> בשביל לגשת לנתונים הנ"ל יש להכניס פרמטר במתודה ngOnchanges,
+  <br> בתוך המתודה ניגשים אל הנתונים באמצעות הפרמטר ואז key הinput ואז key נוסף הנתון שבו אנו מעוניינים, דוגמא: <code>parameter.input.something</code>, הנתונים הם:
+  <br>  1) האם המתודה השתנתה - firstChange, 
+  <br> 2) הערך הנוכחי - currentValue, 
+  <br> 3) הערך הקודם - previousValue,
+</p>
+  <app-complate-example [card]='simplechanges' example='https://stackblitz.com/edit/ngonchanges-simplechanges?file=app/app.component.ts' download='ngonchanges-simplechanges.zip'></app-complate-example>
+
+  <p></p>
+  <p class="space-line">ngOnchanges עוקב רק אחרי properties מסוג primitive כמו string number וboolean אבל לא אחרי object מכיון שהם רק refernce</p>
+  <app-complate-example [card]='ngOnchangesRefernce' example='https://stackblitz.com/edit/ngonswitch-refernce?file=app/app.component.ts' download='ngonswitch-refernce.zip'></app-complate-example>
+
+<h2>ngOnInint</h2>
+<p>המתודה מופעלת כשהקלאס נוצר</p>
+<app-complate-example [card]='ngOnInint' example='https://stackblitz.com/edit/ngclass?file=app/app.component.ts' download='ngclass.zip'></app-complate-example>
+
+
+<h2>ngDoCheck</h2>
+<p>ngDoCheck פועלת כמו המתודה ngOnchanges, השוני הוא שngDoCheck מופעל גם עלproperty בcomponent מארח ולא רק על הproperty של אותו קלאס,</p>
+<app-complate-example [card]='ngDoCheck' example='https://stackblitz.com/edit/ngdocheck?file=app/app.component.ts' download='ngdocheck.zip'></app-complate-example>
+
+<h2>ngAfterContentInit</h2>
+<p>פועלת כמו ngOnInint רק שפועל אחרי שהview של הchiled של הcomponent נטען,</p>
+
+<h2>ngAfterContentChecked</h2>
+<p>פועלת כמו ngOnInint רק שפועל אחרי שהסקריפט של הchiled של הcomponent נטען,</p>
+
+<h2>ngAfterViewInit</h2>
+<p>פועלת אחרי שהתצוגה מוכנה, שזה אומר שngAfterViewInit פועלת אחרי שהview נטען,</p>
+<app-complate-example [card]='ngAfterViewInit' example='https://stackblitz.com/edit/ngafterviewinit?file=app/app.component.ts' download='ngafterviewinit.zip'></app-complate-example>
+
+<h2>ngAfterViewChecked</h2>
+<p>מופעלת כל פעם שיש שינוי בתצוגה, זאת אומרת כל פעם שיש שינוי בchild</p>
+<app-complate-example [card]='ngAfterViewChecked' example='https://stackblitz.com/edit/ngafterviewchecked?file=app/app.component.ts' download='ngafterviewchecked.zip'></app-complate-example>
+
+<h2>ngOnDestroy</h2>
+<p>מופעל כשהקלאס נמחק</p>
+<app-complate-example [card]='ngOnDestroy' example='https://stackblitz.com/edit/ngondestroy?file=app/app.component.ts' download='ngondestroy.zip'></app-complate-example>
+<p></p>
+<p>
+  הערה: כשהקלאס נוצר כל המתודות חוץ מngOnDestroy מופעלות לפי הסדר של הרשימה למעלה, 
+  <br> דבר נוסף המתודה constractor מופעלת לפני כל המתודות hooks, 
+</p>

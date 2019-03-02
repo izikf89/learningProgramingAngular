@@ -1,0 +1,86 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+    margin: 0;
+    text-align: right;
+    direction: rtl;
+    height: 100%;
+    width: 100%;
+}
+
+code, .code {
+    display: inline-block;
+    padding: 0 2px;
+    color: black;
+    background: rgb(226, 223, 223);
+    direction: ltr;
+    font-size: 87.5%;
+    word-break: break-word;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.cmd {
+    background-color: black;
+    color: white;
+    display: inline-block;
+    font-family: Courier New;
+    padding: 1px;
+    direction: ltr;
+}
+
+* {
+    direction: rtl;
+}
+
+img {
+    border: black solid 1px;
+}
+
+.mat-card {
+    white-space: pre;
+    text-align: left;
+    direction: ltr;
+    font-family: Courier New;
+    font-weight: bold;
+    margin: 10px 0;
+    overflow: auto;
+    /* background: rgb(211, 211, 211); */
+    background: rgb(242, 242, 255);
+}
+
+.btn-green {
+    color: white !important;
+    background: linear-gradient(to bottom, #009933 0%, #33cc33 100%);
+    text-decoration: none !important;
+}
+
+h2 {
+    margin: 6vh 0 1vh 0;
+}
+
+h3 {    
+    margin: 9vh 0 2vh 0;
+}
+
+h4 {
+    margin: 3vh 0 1vh 0;
+}
+
+h5 {
+    margin: 1vh 0 1vh 0;
+}
+
+h6 {
+    margin: 1vh 0 1vh 0;
+}
+
+.margin-top {
+    margin-top: 16px;
+}
+
+.line-space {
+    margin-top: 2vh;
+}

@@ -1,0 +1,19 @@
+mat-list-item {
+    background: rgba(169, 169, 169, 0.28);
+
+    margin: 6px 7px;
+}
+
+mat-nav-list {
+    padding-bottom: 100px;
+    padding-left: 30px;
+    background: lightgray;
+    width: 275px;
+    height: auto;
+    min-height: 100%;
+}
+
+mat-nav-list a {
+    padding: 10px !important;
+    outline: none;
+}

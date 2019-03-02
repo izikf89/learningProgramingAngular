@@ -1,0 +1,68 @@
+<app-overview></app-overview>
+<p>services מיועדים לשתף ולהעביר מידע ומתודות בין הקלאסים באתר,</p>
+<p>
+  service למעשה זה קלאס גלובאלי (סטטי) עם מופע אחד, 
+  <br> הרחבה על מה זה משתנה גלובאלי ומופעים יש בהמשך הפרק בקטע "משתנה גלובאלי ומופע", יש גם הרחבה למה צריך service בקטע "למה צריך service" בהמשך הפרק,
+</p>
+
+<app-syntex></app-syntex>
+<p> יש שני דרכים ליצור services, הדרך החדשה של אנגולר 6 שלא מצריכה רישום במודולים והservice זמין לכל המודולים, והדרך הישנה שמצריכה רישום במודול וחושפת את הservice לקלאס שאליו הוא נרשם בלבד,</p>
+
+<p>
+  שני הדרכם מתחילות כך:
+  <br> 1) יוצרים קלאס שיש לפניו מתודה decorated <code>@Injectable</code>, (בcli להפעיל: <span class='cmd'>ng g s myServiceName</span>)
+  <br> מכניסים לקלאס את הערכים שרומים לשתף, לדוגמא נכניס לקלאס שני properties אחד עם ערך ואחד עם מתודה, 
+  <br> הservice אמור להראות כך:
+  <app-card [text]='serviceExample'></app-card>
+  <br> מפה זה מתפצל לשני הדרכים שהזכרנו:
+  <br> <b>הדרך החדשה - </b> מוסיפים למתודה <code>@Injectable</code> את הproperty הבא <code>{{ injectServiceNew }}</code> ,  
+  <br> המודול אמור להראות כך:
+  <app-card [text]='injectServiceNewComplate'></app-card>
+  <br> <b>הדרך הישנה - </b> לרשום את הservice בקלאס מודול בrpooerty שנקרא providers, אם השתמשתם בcli בשביל ליצור את הservice אז הcli  כבר רשם את הservice במודול,
+  <br> המודול אמור להראות כך:
+  <app-card [text]='moduleExample'></app-card>
+</p>
+
+<p>כעת יש לנו service, בשביל לגשת אליו בקלאס אחר צריך להשתמש במתודה מובנית שנקראת <code>constructor</code>,</p>
+
+<h4>constractor</h4>
+<p>
+  בשביל לגשת לservice חובה לרשום אותו במתודה constractor,
+  <br> המתודה constractor מופעלת באופן אוטומטי כשהקלאס נוצר, 
+  <br> הרישום נעשה כמו הגדרה של פרמטר במתודה constractor כשהtype שלו זה הservice כך: <code>{{ constractorExample }}</code> ,
+  <br> בשביל שיהיה זמין מחוץ לscope של הconstructor יש להוסיף הרשאה <code>private</code> לפני הפרמטר כך: <code>{{ privateExample }}</code>
+  <br> זה אמור להראות כך:
+</p>
+<app-complate-example [card]='getServiceExample' example='https://stackblitz.com/edit/service-simple?file=app/app.component.ts' download='service-simple.zip'></app-complate-example>
+
+<h4>כללים נוספים</h4>
+<p>
+  הרישום בconstructor נקרא "inject dependenceis", 
+  <br> service יעבוד גם אם לא יהיה לפניו את <code>@Injectable</code>, יש חובה לשים <code>@Injectable</code> רק אם יש בתוך הservice את המתודה constractor, מומלץ לשים בכל מקרה <code>@Injectable</code> בשביל למנוע באגים,
+</p>
+
+<h4>רישום service</h4>
+<p>
+  בדוגמא למעלה הservice נרשם בקובץ מודול, ניתן לרשום service גם בcomponent וdirective על ידי רישום בrpooerty providers במתודת decorated, זה נראה כך: <code>{{ providersComponent }}</code>,
+  <br> כאשר service נרשם בקלאס כלשהו נוצר מופע חדש של הservice שזמין לקלאס ולchildren שלו, (children - הקלאסים שהקלאס מכיל),
+  <br> לדוגמא אם service נרשם במודול אז נוצר מופע של הservice שזמין לכל הקלאסים שרשומים במודול, כל שינוי שיעשה אחד מהקלאסים בservice יורגש גם בקלאסים האחרים כי כולם משתמשים באותו מופע של הservice,
+  <br> אם אחד מהקלאסים שרשומים במודול רשם גם כן את הservice, יווצר מופע חדש של הservice לאותו קלאס ולכן הוא לא יושפע משינויים שקלאסים אחרים יעשו בservice,  
+</p>
+<app-complate-example [card]='getServiceExample' example='https://stackblitz.com/edit/service-register?file=app/app.component.ts' download='service-register.zip'></app-complate-example>
+<h4>משתנה גלובאלי ומופע</h4>
+<p>
+  משתנה רגיל לא יוצא מגבולות הscope שלו שזה אומר מחוץ לסוגריים המסולסלות שבהם הוא נמצא, 
+  לדוגמא אם שינינו משתנה בתוך מתודה השינוי לא יורגש מחוץ לגבולות המתודה, 
+  <br>למה זה קורה? כי כי כשיוצרים משתנה יש לו מופע אחד בזיכרון וכשניגשים אליו בתוך מתודה נוצר מופע נוסף של המשתנה עם הערך של נוכחי של המשתנה שאליו ניתן לגשת רק בתוך המתודה, 
+  לכן כשמשנים את המשתנה בתוך המתודה זה לא יורגש מחוץ למתודה,
+  <br> משתנה גלובאלי יש לו מופע אחד בלבד בזיכרון וניתן לשנות ולגשת אליו מכל scope,  
+</p>
+
+<h4>למה צריך service</h4>
+<p>
+  באופן כללי לא יוצרים דברים שהם סטטים מכיון שבדרך כלל אנחנו לא זוכרים את השמות של כל המשתנים והקלאסים שיצרנו
+   ועלול להיגרם מצב שנדרוס בטעות את האובייקט על ידי שניצור משתנה אם אותו השם ואז יהיה לנו יופי של באג שמאוד קשה לאתר,
+   כשמשתנה נמצא בתוך scope זה מצמצם את האפשרות לדריסה, אבל אם המשתנה הוא גלובאלי זאת אומרת שהוא מופיע גם מחוץ לscope יש סיכוי גבוה לדריסה,
+   אבל מצד שני תמיד יש מידע שרוצים שיהיה משותף לכולם ולפעמים יש צורך לשתף מידע בין scope לscope,
+   באנגולר פתרו את הבעיה על ידי יצירת קלאס גלובאלי שלא מופיע בscope אלא אם כן פנית למיקום שלו בצורה ישירה וכך אין חשש לדריסה.
+</p>

@@ -1,0 +1,102 @@
+<h2>הקדמה</h2>
+<p>
+  המתודה <code>constructor</code> מאפשרת הזרקה של service על ידי רישום כפרמטר את הקלאס שמייצג את הservice, כמו בדוגמא: <code>{{ injectConstructor }}</code>,
+  <br> ניתן להזריק במתודה <code>constructor</code> בצורה רגילה רק service שמיוצגים על ידי קלאס ולא שום type אחר,
+</p>
+
+<h2>Injectable@</h2>
+<p>
+  כל קלאס ואפילו סתם משתנה יכול להיות service גם בלי שיש לפניו את המתודה <code>@Injectable</code>,
+  <br> המתודה <code>@Injectable</code> נצרכת רק מתי שיש בתוך הservice שימוש לייבא קלאסים אחרים באמצעות המתודה <code>constructor</code>,
+  <br> דוגמא לservice שמשתף מידע בין component אפילו שאין לו את המתודה <code>@Injectable</code>:
+</p>
+<app-complate-example [card]='Injectable' example='https://stackblitz.com/edit/angular-class-service?file=src/app/app.module.ts' download='angular-class-service.zip' ></app-complate-example>
+
+<p>שתי מילים על <code>Injector</code>: <code>Injector</code> מטפל בservice, הוא מחזיק שני מתודות: <code>create</code> בשביל לרשום ו<code>get</code> בשביל להזריק</p>
+
+<h2>Injector.get</h2>
+<p><code>Injector.get</code> מאפשר לגשת לservice בתוך component גם בלי להזריק אותו במתודה <code>constructor</code>,</p>
+<p>
+  1) יש לייבא את <code>Injector</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importInjector }}</code>,
+  <br> 2) רושמים את ה<code>Injector</code> במתודה constructor, דוגמא: <code>{{ constructorInjector }}</code>,
+  <br> 3) ב<code>Injector</code> משתמשים במתודה <code>get</code> שמקבלת כפרמטר את הservice שרושמים ומכניסים את מה שמתודה מחזירה לvariable, דוגמא: <code>{{ Injector }}</code>,
+</p>
+<app-complate-example [card]='injectorComplate' example='https://stackblitz.com/edit/angular-injector?file=src/app/app.component.ts' download='angular-injector.zip'></app-complate-example>
+
+<p class="line-space"><code>Injector</code> יכול להזריק גם service שמיוצגים לא על ידי קלאס כמו בדוגמא הבאה שהservice מיוצג על ידי string</p>
+<app-complate-example [card]='injectorStringComplate' example='https://stackblitz.com/edit/angular-injector-string?file=src/app/app.component.ts' download='angular-injector-string.zip'></app-complate-example>
+
+<h2>Injector.create</h2>
+<p>מאפשר לרשום service מחוץ לcomponent או מודול</p>
+<p>
+  1) יש לייבא את <code>Injector</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importInjector }}</code>,
+  <br> 2) יש להוסיף את הproviders בתוך המתודה <code>create</code> כמו שרושמים בcomponent או מודול, המתודה תחזיר <code>injector</code> שמחזיק את הservice, דוגמא: <code>{{ injectorCreate }}</code>
+  <br> 3) בשביל לגשת לservice יש להשתמש במתודה <code>get</code> שמחזירה הזרקה של הservice כמו בדוגמא: <code>{{ InjectorGetService }}</code>
+</p>
+<app-complate-example [card]='injectorCreateComplate' example='https://stackblitz.com/edit/angular-injector-create?file=src/app/app.component.ts' download='angular-injector-create.zip'></app-complate-example>
+
+<h2>Inject@</h2>
+<p>המתודה <code>Inject</code> מאפשר להזריק במתודה <code>constructor</code> service שאינם מיוצגים על ידי קלאס,</p>
+<p>
+  1) יש לייבא את <code>Inject</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importInject }}</code>,
+  2) את המתודה <code>Inject</code> מכניסים כפרמטר למתודה <code>constructor</code>, המתודה <code>Inject</code> מקבלץ כפרמטר את הservice ומוסיפים אחרי המתודה עוד מילה שתייצג את הservice בcomponent
+</p>
+<app-complate-example [card]='injectComplate' example='https://stackblitz.com/edit/angular-inject-simple?file=src/app/app.component.ts' download='angular-inject-simple.zip'></app-complate-example>
+
+<h2>InjectionToken</h2>
+<p>מיועד ליצור token שאינו קלאס,</p>
+<p>
+    1) יש לייבא את <code>InjectionToken</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importInjectionToken }}</code>,
+    <br> 2) ליצור את הtoken כמו בדוגמא: <code>{{ InjectionToken }}</code>,
+</p>
+<app-complate-example [card]='InjectionTokenComplate' example='https://stackblitz.com/edit/angular-injectiontoken?file=src/app/app.component.ts' download='angular-injectiontoken.zip'></app-complate-example>
+<p class='line-space'>
+  חובה לשים ב<code>InjectionToken</code> פרמטר string, ואין שום משמעות מה הstring ואפשר לכתוב שם מה שרוצים או בכלל לא כמו בדוגמא הנ"ל,
+  <br> אין כמעט הבדל אם עושים token עם <code>InjectionToken</code> או סתם string, יש הבדל אם יש שני token שהערכים שלהם שווים כמו בדוגמא שאפשר לראות בקישורים הבאים:
+  <app-complate-example example='https://stackblitz.com/edit/angular-injectiontoken-compare?file=src/app/app.component.ts' download='angular-injectiontoken-compare.zip'></app-complate-example>
+  <br> בגלל שאני לא רואה צורך להרחיב בנושא של <code>InjectionToken</code> ולכתוב על זה פוסט שלם אני יעצור פה, מי שמעוניין לראות יותר יוכל למצוא מידע <a href='https://blog.thoughtram.io/angular/2016/05/23/opaque-tokens-in-angular-2.html'>בפוסט הזה</a>
+</p>
+
+<h2>Optional@</h2>
+<p>אם ננסה להזריק במתודה <code>constructor</code> service שלא נרשם בproviders התוכנית תעצר, <code>Optional</code> גורם שהתוכנית לא תעצר, </p>
+<p>
+  1) יש לייבא את <code>Optional</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importOptional }}</code>,
+  <br> במתודה <code>constructor</code> לפני ששמים את הservice יש לשים את המתודה <code>Optional</code> כמו בדוגמא: <code>{{ optional }}</code>
+</p>
+<app-complate-example [card]='optionalComplate' example='https://stackblitz.com/edit/angular-optional?file=src/app/app.component.ts' download='angular-optional.zip'></app-complate-example>
+
+<p>בצורה רגילה כשמזריקים service במתודה <code>constructor</code> המתודה בודקת אם הcomponent שמארח אותה רשם את הservice, במידה ולא היא בודקת האם הservice רשום בcomponent שמארח אותה וכן הלאה,
+המתודה תמיד תחפש במעלה העץ של הקלאסים האם אחת מהקלאסים רשמה את הservice, המתודות שנראה בהמשך הפרק משנות את צורת החיפוש של המתודה,</p>
+
+<h2>SkipSelf@</h2>
+<p>אומר למתודה <code>constructor</code> לא לחפש בcomponent הנוכחי אלא להתחיל לחפש בparent שלו,</p>
+<p>
+  1) יש לייבא את <code>SkipSelf</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importSkipSelf }}</code>,
+  <br> במתודה <code>constructor</code> לפני ששמים את הservice יש לשים את המתודה <code>SkipSelf</code> כמו בדוגמא: <code>{{ importSkipSelf }}</code>
+</p>
+<app-complate-example [card]='SkipSelfComplate' example='https://stackblitz.com/edit/angular-skipself?file=src/app/app.component.ts' download='angular-skipself.zip'></app-complate-example>
+
+<h2>Self@</h2>
+<p>אומר למתודה <code>constructor</code> לחפש רישום של service אך ורק בתוך <b>הcomponent</b> שבו היא נמצאת,</p>
+<p>
+  1) יש לייבא את <code>Self</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importSelf }}</code>,
+  <br> במתודה <code>constructor</code> לפני ששמים את הservice יש לשים את המתודה <code>Self</code> כמו בדוגמא: <code>{{ Self }}</code>
+</p>
+<app-complate-example [card]='SelfComplate' example='https://stackblitz.com/edit/angular-self-simple?file=src/app/app.component.ts' download='angular-self-simple.zip'></app-complate-example>
+
+<h2>Host@</h2>
+<p>אומר למתודה <code>constructor</code> לחפש רישום של service אך ורק בתוך <b>הelement</b> שבו היא נמצאת,</p>
+<p>
+  1) יש לייבא את <code>Host</code> מהספריה <code>@angular/core</code>, דוגמא: <code>{{ importHost }}</code>,
+  <br> במתודה <code>constructor</code> לפני ששמים את הservice יש לשים את המתודה <code>Host</code> כמו בדוגמא: <code>{{ Host }}</code>
+</p>
+<app-complate-example [card]='HostComplate' example='https://stackblitz.com/edit/angular-host-simple?file=src/app/app.component.ts' download='angular-host-simple.zip'></app-complate-example>
+<p class="line-space">
+  ההבדל המעשי בין <code>Self</code> ל <code>Host</code> הוא זעיר ויכול לקרות רק במקרים נדירים, נביא שתיים מהם:
+  <br> 1) במקרה של שימוש ב<code>ViewProviders</code> שמחזיק את הservice בDOM של הchiled: 
+  <app-complate-example example='https://stackblitz.com/edit/angular-host-viewproviders?file=src/app/app.component.ts' download='angular-host-viewproviders.zip'></app-complate-example>
+</p>
+<p class="line-space">
+  2) במקרה של שימוש ב<code>ng-content</code> כך שלמעשה הchiled הוא חלק מאלמנט של הparent:
+  <app-complate-example example='https://stackblitz.com/edit/angular-host-ng-content?file=src/app/app.component.ts' download='angular-host-ng-content.zip'></app-complate-example>
+</p>

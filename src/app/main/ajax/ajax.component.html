@@ -1,0 +1,52 @@
+<app-overview></app-overview>
+<p>לאנגולר יש תחביר מיוחד קצר קל קריא וגמיש,</p>
+
+<app-syntex></app-syntex>
+<p>
+  דבר ראשון יש לייבא ולרשום בקובץ מודול את המודול <code>HttpClientModule</code>, הייבוא הוא כך: <code>{{ module }}</code>,
+  <br> בקובץ שבו צריך ajax יש לייבא כך: <code>{{ import }}</code>, 
+  <br> ולרשום במתודה constructor כך: <code>{{ Constructor }}</code>,
+</p>
+
+<p> המתודות של אנגולר בajax הם אובייקט observable מה שאומר שצריך להשתמש במתודה <code>subscript</code> בשביל לשלוח את הajax , כמו בדוגמא:</p>
+<app-card [text]='subscribe'></app-card>
+
+<p> גם בשביל לגשת לתשובה שהחזיר השרת צריך להשתמש ב<code>subscribe</code>, כמו בדוגמא:</p> 
+<app-card [text]='response'></app-card>
+<p>השימוש בsubscribe לגשת לתשובה הוא אופצונלי</p>
+
+<h4>GET</h4>
+<p>ajax מסוג GET שולחים כך:</p>
+<app-card [text]='Get'></app-card>
+
+<h4>GET - parameter</h4>
+<p>ajax מסוג GET עם פרמטר שולחים כך:</p>
+<app-card [text]='GetParameter'></app-card>
+
+<h4>POST</h4>
+<p> ajax מסוג POST שולחים כך:</p>
+<app-card [text]='post'></app-card>
+
+<h4>POST - parameter</h4>
+<p> ajax מסוג POST עם פרמטר שולחים כך:</p>
+<app-card [text]='postParameter'></app-card>
+
+<h4>POST - body</h4>
+<p> ajax מסוג POST עם body שולחים כך:</p>
+<app-card [text]='postBody'></app-card>
+
+<h4>header</h4>
+<p>עם רוצים להגדיר לajax header כותבים זאת כך:</p>
+<app-card [text]='header'></app-card>
+
+<h4>retry</h4>
+<p>
+  המתודה הזאת מגדירה מספר הפעמים שה ajax ישלח אם הוא נכשל,
+  <br> יש לייבא את המתודה כך: <code>import 'rxjs/add/operator/retry';</code>
+  ולהגדיר את המתודה בajax כך:
+</p>
+<app-card [text]='retry'></app-card>
+
+<h4>header - response</h4>
+<p>כך ניגשים לheader של התשובה שחזרה לajax:</p>
+<app-card [text]='headerResponse'></app-card>

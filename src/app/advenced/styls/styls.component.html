@@ -1,0 +1,30 @@
+<app-overview></app-overview>
+<p>יש פקודות Pseudo-Elements שמיוחדות לאנגולר, הכינוי שלהם זה modifier,</p>
+
+<h2>איפה כותבים css</h2>
+<p>
+    באנגולר יש שתי מקומות שאפשר לכתוב css: 
+    <br> 1) בקובץ styles.css שנמצא בנתיב הבא: rootFolder/src/styles.css, הcss שנכתב בקובץ הזה ישפיע על כל הפרוייקט,
+    <br> 2) בתוך הcomponent בproperty styles של המתודה component כמו בדוגמא הבאה:
+    <br> <app-card [text]='style'></app-card>
+    <br> ואפשר גם באמצעות קישור בproperty stylesUrl של המתודה component כמו בדוגמא הבאה:
+    <br> <app-card [text]='styleUrl'></app-card>
+    <br> css שנכתב בתוך הcomponent ישפיע אך ורק על על הcomponent ואפילו לא על הchildren שלו,
+    <app-complate-example [card]='stylesChild' example='https://stackblitz.com/edit/angular-style?file=src/app/app.component.ts' download='angular-style.zip'></app-complate-example>
+</p>
+
+<h2>host:</h2>
+<p>
+    <code>:host</code> מפעיל css על הcomponent עצמו, מוסיפים את <code>:host</code> לפני הקלאס
+    <app-complate-example [card]='host' example='https://stackblitz.com/edit/angular-host?file=src/app/app.component.ts' download='angular-host.zip'></app-complate-example>
+</p>
+<p>
+    אפשר להגדיר שה<code>:host</code> יחול רק על אלמנט או קלאס או id כמו בדוגמא: <code>{{ hostElment }}</code>,    
+    <br> ישנו modifier דומה <code>:host-context</code> שמה שמיוחד בו בניגוד ל <code>:host</code> הרגיל זה שהcss שאם הוא התנה את הcss בקלאס או אלמנט מספיק שיש לאחד מהparent שלו את הקלאס או האלמנט בשביל שההתניה תבוצע,
+</p>
+
+<h2>ng-deep::</h2>
+<p>
+    <code>::ng-deep</code> מחיל css גם על children, דוגמא: <code>{{ deep }}</code>
+    <app-complate-example [card]='deepComplate' example='https://stackblitz.com/edit/angular-ng-deep?file=src/app/app.component.ts' download='angular-ng-deep.zip'></app-complate-example>
+</p>

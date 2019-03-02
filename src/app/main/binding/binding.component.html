@@ -1,0 +1,40 @@
+<h2>מה זה</h2>
+<p>
+  binding זה היכולת של אנגולר לתקשר בין הקוד (typescript) לתצוגה (html), 
+  <br> בצורה רגילה מעבירים מידע מהקוד לתצוגה ולהפך באמצעות <code>getElementById('myId').innerHTML</code>, באנגולר כל property שקיים בקלאס של הcomponent זמין כמשתנה בתצוגה,
+</p>
+
+<h4>פרטים</h4>
+<p>
+  בhtml ניתן לגשת אל הproperty בתוך סוגריים עגולות או מרובעות או מסולסלות זה תלוי איפה ניגשים לproperty, ישנם ארבעה סוגי binding :
+</p> 
+<ul>
+  <li> מהקוד לתצוגה - סוגריים מסולסלות, לדוגמא  בקוד: <code>{{ example6 }}</code> בתצוגה: <code>{{ example7 }}</code>,</li>
+  <li>מהקוד לattribute - הattribute צריך להיות בתוך סוגריים מרובעות (ניתן להכניס ערך לכל property של התג), לדוגמא  בקוד: <code>{{ example8 }}</code> בתצוגה: <code>{{ example9 }}</code>,</li>
+  <li>מattribute לקוד - סוגריים עגולות, לדוגמא  בקוד: <code>{{ example10 }}</code> בתצוגה: <code>{{ example11 }}</code>, בדוגמא הזאת אנגולר ניגש למתודה בקוד כשקורה event מסוג click,</li>
+  <li>מהקוד לתצוגה וגם מהתצוגה לקוד - סוגריים מרובעות ובתוכם סוגריים עגולות, קיים רק במקרה שמשתמשים <a >בngModel</a> , זה לא יפורט בפרק זה,</li>
+</ul>
+
+<h4>דוגמאות:</h4>
+
+<p>מהקוד לתצוגה:</p>
+<app-complate-example [card]='toView' example='https://stackblitz.com/edit/binding-to-view?file=app/app.component.ts' download='binding-to-view.zip'></app-complate-example>
+
+<p>מהקוד לattribute:</p>
+<app-complate-example [card]='toAttribute' example='https://stackblitz.com/edit/binding-to-attribute?file=app/app.component.ts' download='binding-to-attribute.zip'></app-complate-example>
+
+<p>מattribute לקוד:</p>
+<app-complate-example [card]='toScript' example='https://stackblitz.com/edit/binding-attribute-to-script?file=app/app.component.ts' download='binding-attribute-to-script.zip'></app-complate-example>
+
+<h4>כללים</h4>
+<ul>  
+  <li>ניתן גם לגשת למתודות שמחזירות ערך, לדוגמא בקוד יש מתודה: <code>{{ example7 }}</code> ניתן לקבל את הערך של המתודה על ידי שנכתוב בתצוגה <code>{{ example3 }}</code>,</li>
+  <li>לא ניתן לבצע בתצוגה שינויים בproperties כמו <code>{{ example4 }}</code></li>
+  <li>לא ניתן להפעיל בתצוגה את הפקודות <code>console.log()</code>, <code>windows</code>, <code>document</code>, <code>Math</code>,</li>
+  <li>ניתן לעשות בתצוגה expression כמו <code>{{ example5 }}</code></li>
+</ul> 
+
+<h4 id='attribute'>ההבדל ביןattribute לproperty</h4>
+<p>בתג html יש attribute בלבד, דוגמא לattribute זה id, לכל תג html הdom (שזה אפשר לומר המנוע של הjavascript) יוצר object שמשקף את התג html, הproperties של האובייקט הזה זה הattribute של התג ועוד כל הדברים שמגדירים את התג כמו הvalue שלו שהם אינם attribute, 
+  <br> כשמשנים את הproperties של האובייקט הdom משנה את התג בהתאם לשינויים שבוצעו באובייקט, באנגולר כשמשתמשים בbinding בשביל לשנות תג אז משנים את הproperties של התג והdom מעדכן את תג,
+</p>

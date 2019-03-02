@@ -1,0 +1,34 @@
+<h2>גישה לchild</h2>
+<p>
+  אפשר לגשת לchild של component באמצעות המתודה 
+  <code>@ViewChild</code> והמתודה <code>@ContentChild</code>,
+</p>
+<p>ההבדל בינהם זה ש <code>@ViewChild</code> ניגש לchild שהוגדרו באותו component ו<code>@ContentChild</code> ניגש לchild שהוגדרו בcomponent אחר,  </p>
+
+<p>דוגמא לchild שהוגדרו באותו component:</p>
+<app-card [text]='childInComponent'></app-card>
+
+<p class="line-space"> דוגמא לchild שהוגדרו בcomponent אחר: (הchild של ParnetComponent הוגדרו בAppComponent)</p>
+<app-card [text]='childOutComponent'></app-card>
+
+<h3>ViewChild@</h3>
+<p>
+  יבא את הקלאס ViewChild כמו בדוגמא: <code>{{ importViewChild }}</code>,
+  <br> כעת הוסף לקלאס את את המתודה <code>@ViewChild</code>, ובתוך סוגריים עגולות יש לשים את הקלאס של הchild, ושם כלשהו שהוא יהיה הproperty שבו יהיה הchild, דוגמא: <code>{{ ViewChild }}</code>,
+</p>
+<app-complate-example [card]='ViewChildComplate' example='https://stackblitz.com/edit/angular-viewchild-simple?file=app/app.component.ts' download='angular-viewchild-simple.zip'></app-complate-example>
+
+<h3>ContentChild@</h3>
+<p>
+    יבא את הקלאס ContentChild כמו בדוגמא: <code>{{ importContentChild }}</code>,
+    <br> כעת הוסף לקלאס את את המתודה <code>@ContentChild</code>, ובתוך סוגריים עגולות יש לשים את הקלאס של הchild, ושם כלשהו שהוא יהיה הproperty שבו יהיה הchild, דוגמא: <code>{{ ContentChild }}</code>,   
+</p>
+<app-complate-example [card]='ContentChildComplate' example='https://stackblitz.com/edit/angular-contentchild-simple?file=app/app.component.ts' download='angular-contentchild-simple.zip'></app-complate-example>
+
+<h2>גישה דרך hashtag</h2>
+<p>
+  ניתן לגשת לcomponent אחרים על ידי גישה לhashtag שלהם,
+  הגישה היא על ידי כתיבת השם של הhashtag כפרמטר string ב<code>@ViewChild</code> או <code>@ContentChild</code>, תלוי עם הcomponent שרוצים לגשת אליו נמצא בcomponent הנוכחי כמו בדוגמאות הנ"ל, 
+  <br> בדוגמא הבאה יש גישה לcomponent אחר באמצעות <code>@ViewChild</code>:
+</p>
+<app-complate-example [card]='hashtagComplate' example='https://stackblitz.com/edit/angular-viewchild-hashtag?file=app/app.component.ts' download='angular-viewchild-hashtag.zip'></app-complate-example>

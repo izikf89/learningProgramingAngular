@@ -1,0 +1,77 @@
+<h2>סקירה</h2>
+<p>
+  directive הם attribute שנוצרו על ידי אנגולר,
+  <br> אפשר ליצור directive חדשים וישנם directive חדשים שבאים עם אנגולר, בפרק זה נתמקד באלה שכבר קיימים,
+</p>
+
+<h2>ngFor*</h2>
+<h5>מה זה עושה:</h5>
+<p>
+  ngFor* מציג מערכים, הוא מכפיל את התג שבו הוא נמצא כמספר התאים במערך כשבכל תג שנוצר ניתן לשים בו ערך של תא במערך, למעשה זה לולאה בhtml,
+  <br> לדוגמא בקוד: <code>{{ ngForExample1 }}</code>, בתצוגה: <code>{{ ngForExample2 }}</code>,
+</p>
+<app-complate-example [card]='cardNgfor' example='https://stackblitz.com/edit/ngfor-simple?file=app%2Fapp.component.ts' download='ngfor-simple.zip'></app-complate-example>
+
+<h3>אפשרויות נוספות</h3>
+<h4>ngFor - index</h4>
+<h5>מה זה עושה:</h5>
+<p>יש אפשרות להוסיף index ללולאה זה נראהבתצוגה כך: <code>{{ indexExample }}</code>,</p>
+<app-complate-example [card]='cardNgforIndex' example='https://stackblitz.com/edit/ngfor-index?file=app%2Fapp.component.ts' download='ngfor-index.zip'></app-complate-example>
+
+
+<h2>ngIf*</h2>
+<h5>מה זה עושה:</h5>
+<p>
+  מוחק את התג שבו הוא נמצא אם מקבל ערך בוליאני <code>false</code> או <code>null</code> או <code>undefined</code>,
+  <br> כך זה נראה בתצוגה: <code>{{ ngIfExample }}</code>,
+</p>
+<app-complate-example [card]='cardNgIf' example='https://stackblitz.com/edit/ngif?file=app%2Fapp.component.ts' download='ngif.zip'></app-complate-example>
+
+<h3>אפשרויות נוספות</h3>
+<h4>ngIf - else</h4>
+<h5>מה זה עושה:</h5>
+<P>
+  ניתן להגדיר תג html בשם <code>ng-template</code>  שיופיע אם הngIf מקבל ערך false
+  <br> כך זה נראה בתצוגה: <code>{{ ngIfElseExample }}</code>,
+</P>
+<app-complate-example [card]='cardNgIfElse' example='https://stackblitz.com/edit/ngif-else?file=app%2Fapp.component.ts' download='ngif-else.zip'></app-complate-example>
+
+<h4>ngIf - then</h4>
+<P>
+  ניתן להגדיר תג html בשם <code>ng-template</code>שיופיע אם הngIf מקבל ערך true
+  <br> כך זה נראה בתצוגה: <code>{{ ngIfThenExample }}</code>,
+</P>
+<app-complate-example [card]='cardNgIfThen' example='https://stackblitz.com/edit/ngif-then?file=app%2Fapp.component.ts' download='ngif-then.zip'></app-complate-example>
+
+
+<h2>ngClass</h2>
+<h5>מה זה עושה:</h5>
+<p>ngClass מפעיל css class שהוגדר מראש במידה שקיבל true,</p>
+<h5>איך כותבים:</h5>
+<p>
+  הdirective ngClass מקבל אובייקט שהkey שלו זה שם הקלאס והvalue שלו זה ערך בוליאני של <code>true</code> של <code>false</code>,
+  <br> כך זה נראה בתצוגה: <code>{{ ngClassExample }}</code>,
+</p>
+<app-complate-example [card]='ngClassExampleComplate' example='https://stackblitz.com/edit/ngclass-simple?file=app/app.component.ts' download='ngclass-simple.zip'></app-complate-example>
+
+
+<h2>ngStyle</h2>
+<h5>מה זה עושה:</h5>
+<p> ngStyle מפעיל style חדש, </p>
+<h5>איך כותבים:</h5>
+<p>
+  הdirective ngStyle מקבל אובייקט שכתוב כמו אובייקט של קלאס css,
+  <br> כך זה נראה בתצוגה: <code>{{ ngStyleExample }}</code>,
+</p>
+<app-complate-example [card]='ngStyleExampleComplate' example='https://stackblitz.com/edit/ngstyle?file=app/app.component.ts' download='ngstyle.zip'></app-complate-example>
+
+<h2>ngSwitch</h2>
+<h5>מה זה עושה:</h5>
+<p> ngSwitch יכול להגדיר שתגי html יופיעו ויעלמו לפי הערך שהוא מקבל, </p>
+<h5>איך כותבים:</h5>
+<p>
+  הdirective ngSwitch מקבל ערך כלשהו וגם מוגדר אצלו hashtag, בתגי html אחרים יש attribute בשם <code>*ngSwitchCase</code> שמקבל ערך, אם הערך ב<code>*ngSwitchCase</code> ובngSwitch שווה הhtml יופיע,  
+  <br> כך זה נראה בתצוגה: 
+</p>
+<app-card [text]='ngSwitchExample'></app-card>
+<app-complate-example [card]='ngSwitchExampleComplate' example='https://stackblitz.com/edit/ngswitch?file=app/app.component.ts' download='ngswitch.zip'></app-complate-example>

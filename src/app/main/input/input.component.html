@@ -1,0 +1,73 @@
+<app-overview></app-overview>
+<p>לתג input יש כמה כלים שמיוחדים בשבילו</p>
+
+<p>
+  בשביל הכלים של input יש צורך לייבא מודול בשם <code>FormsModule</code> דוגמא: <code>{{ import }}</code>
+  <br> כעת יש לרשום אותו בקלאס מודול בproperty שנקרא imports,
+</p>
+
+<h2>ngModel</h2>
+<p>
+   הdirective ngModel יוצר binding לinput לשני הכיוונים מהתצוגה לקוד וגם להפך,
+  <br> כותבים את זה כך: <code>{{ ngModel }}</code>
+</p>
+<app-complate-example [card]='ngModelComplate' example='https://stackblitz.com/edit/input-ngmodel?file=app/app.component.ts' download='input-ngmodel.zip'></app-complate-example>
+
+<h2>select</h2>
+<p>
+   הdirective ngModel יכול להיות גם בתג select,
+  <br> כותבים את זה כך: <code>{{ select }}</code>
+</p>
+<app-complate-example [card]='selectComplate' example='https://stackblitz.com/edit/input-select?file=app/app.component.ts' download='input-select.zip'></app-complate-example>
+
+<h2>radio</h2>
+<p>
+   הdirective ngModel יכול להיות גם בשדה מסוג <code>radio</code>,
+  <br> כותבים את זה כך: <code>{{ radio }}</code>
+</p>
+<app-complate-example [card]='radioComplate' example='https://stackblitz.com/edit/angular-input-radio?file=src/app/app.component.ts' download='angular-input-radio.zip'></app-complate-example>
+
+<h2>checkbox</h2>
+<p>
+   הdirective ngModel יכול להיות גם בשדה מסוג <code>checkbox</code>,
+  <br> כותבים את זה כך: <code>{{ checkbox }}</code>
+</p>
+<app-complate-example [card]='checkboxComplate' example='https://stackblitz.com/edit/angular-input-checkbox?file=src/app/app.component.ts' download='angular-input-checkbox.zip'></app-complate-example>
+
+<h2>ngValue</h2>
+<p>
+  ngValue עושה  שngModel בselect יקבל את כל האובייקט הנבחר,
+  <br> הסבר: בselect ngModel מקבל את הערך שנכתב בתוך הסוגריים המסולסלות, לכן כשהngFor מקבל מערך של אובייקטים ובתוך הסוגריים המסולסלות פונים לkey מסויים, אז התוצאה תיהיה שהngModel יקבל רק את הvalue של הkey ולא את כל האובייקט עצמו, הngValue גורם שנקבל את כל האובייקט, 
+  <br> הפעלה: מוסיפים את הdirective ngValue ומכניסים לngValue את הindex, כמו בדוגמא הבאה: <code>{{ ngValue }}</code>
+</p>
+<app-complate-example [card]='ngValueComplate' example='https://stackblitz.com/edit/input-ngvalue?file=app/app.component.ts' download='input-ngvalue.zip'></app-complate-example>
+
+<h2>ngModelChange</h2>
+<p>
+   ngModelChange זה event שמופעל כל פעם שיש שינוי בngModel,
+   <br> בשביל לגשת לערך החדש מוסיפים את הngModelChange כמו כל event <code>(ngModelChange)="onChange($event)"</code>
+   <app-complate-example [card]='ngmodelchangeOld' example='https://stackblitz.com/edit/angular-ngmodelchange-old?file=src/app/app.component.ts' download='angular-ngmodelchange-old.zip'></app-complate-example>
+   <!-- <br> בשביל לגשת לערך הקודם מוסיפים hashtag ואת הhashtag מוסיפים לפונקציה של שמפעיל הevent כמו בדוגמא: <code>#var="ngModel" (ngModelChange)="onChange(var)"</code>
+   <app-complate-example [card]='ngmodelchangeNew' example='https://stackblitz.com/edit/angular-ngmodelchange-new?file=src/app/app.component.ts' download='angular-ngmodelchange-new.zip'></app-complate-example> 
+  is not work -->
+</p>
+
+<h2>validation</h2>
+<p>אין פה משהו חדש רק לתשומת ליבכם באנגולר בשביל להציג הודעות שגיאה משתמשים בhashtag, מכיון שhashtag יכול לגשת לproperties ובproperties נמצאים הvalidation</p>
+<app-complate-example [card]='validation' example='https://stackblitz.com/edit/input-validation?file=app/app.component.ts' download='input-validation.zip'></app-complate-example>
+
+<h2>validation class</h2>
+<p>
+  כשכותבים ngModel בinput אנגולר מוסיף באופן אוטומטי class לפי מצב הvalidation, לדוגמא הclass ng-touched מופיע אחרי שהמשתמש נגע בinput ועזב,
+</p>
+<app-complate-example [card]='validationClass' example='https://stackblitz.com/edit/input-validation-class?file=app/app.component.ts' download='input-validation-class.zip'></app-complate-example>
+<p></p>
+<p>להלן רשימה של הclass שאנגולר מוסיף עם הסבר מתי מופיע:</p>
+<ul>
+  <li><b>ng-touched -</b> מופיע כשהמשתמש נגע ועזב</li>
+  <li><b>ng-untouched- </b>מופיע כשהמשתמש לא נגע ועזב</li>
+  <li><b>ng-dirty  </b> - מופיע כשהמשתמש משנה את הערך בinput</li>
+  <li><b>ng-pristine -</b> מופיע כל עוד שהמשתמש לא משנה את הערך בinput</li>
+  <li><b>ng-valid  </b> - מופיע כשכל הvalidation הם true</li>
+  <li><b>ng-invalid  </b>- מופיע כשאחד הvalidation לא true</li>
+</ul>

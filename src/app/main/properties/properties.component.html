@@ -1,0 +1,33 @@
+<h2>מה זה עושה:</h2>
+<p>
+  באנגולר אפשר להגדיר כל property של תג html כמו שמגדירים כל attribute
+</p>
+<p>
+  אם לא ממש הבנתם את המשפט הקודם ולא ממש ברור לכם מה ההבדל בין attribute וproperty או מה זה "property של תג html" דלגו להמשך העמוד לקטע "מה זה property",
+</p>
+
+<h5>איך כותבים:</h5>
+<P>
+  מתייחסים אל הproperties כמו אל attribute רק שמוסיפים להם סוגריים מרובעות
+  <br> לדוגמא <code>{{ propertiesExample }}</code>,
+</P>
+<app-complate-example [card]='propertiesExampleComplate' example='https://stackblitz.com/edit/angular-properties?file=app/app.component.ts' download='angular-properties.zip'></app-complate-example>
+
+<h2>מה זה property</h2>
+<p>
+  property זה מה שנמצא בתוך אובייקט לדוגמא <code>{{ objectExample }}</code>,
+  <br> בתוך כל תג html קובעים את ההגדרות של התג כמו לדוגמא <code>id</code> זה נקרא attribute וזה חלק מהhtml,
+  <br> לjavascript יש תכונה שנקראת DOM שיוצרת נגד כל תג html אובייקט שמכיל את הattribute של התג ואת התגי html שהוא מכיל, ומאפיינים נוספים מעבר לattribute כמו <code>hidden</code>,
+  <br> כשמשנים תג html עם javascript לא משנים את html אלא את האובייקט שיצר הDOM, הDOM מזהה את השינוי ומעדכן את התג בהתאם,
+  <br> כשאמרנו properties של תג html הכוונה לproperties של האובייקט html שיצר הDOM, 
+</p>
+
+<h4>איפה רואים את הproperties</h4>
+<p>
+  פתחו דפדפן chrome ולחצו על f12, כעת יפתח לכם חלון שנקרא developer tools, 
+  <br> לחצו על כפתור Element,  בחלון יופיע כל html של הדף אינטרנט הנוכחי, כעת לחצו על הכפתור properties מצד ימין למטה כמו בתמונה:
+</p>
+<img src='assets\img\properties1.PNG' class='properties1'>
+<br>
+<p></p>
+<p>ברשימה שנפתחה לחצו על השורה הכי עליונה, כעת נפתחה רשימה של כל הproperties</p>

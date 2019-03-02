@@ -1,0 +1,20 @@
+<app-overview></app-overview>
+<p>
+  בדרך כלל יוצרים אלמנטים בcomponnet ואפשר להשתמש בהם רק בתוך הפרוייקט של אנגולר ולא מעבר לזה, 
+  החל מאנגולר 6 ניתן להפוך components לאלמנטים אמיתיים של html כך שיהיה ניתן להשתמש בהם גם מחוץ לאנגולר,
+  הסוג הזה של האלמנטים מכונה web components והרעיון בהם הוא שאפשר יהיה לשלב קוד בין שני ספריות,
+</p>
+
+<app-syntex></app-syntex>
+<p>
+  דבר ראשון יש להוסיף את הספריה <code>@angular/elements</code> כמו הקוד הבא: <span class='cmd'>ng add @angular/elements</span>
+  <br> כעת יש לייבא את הספריה כמו בדוגמא: <code>{{ import }}</code>,
+  <br> וצריך לייבא גם הservice <code>injector</code> כמו בדוגמא: <code>{{ importInjector }}</code>,
+  <br>  וצריך לייבא גם הservice <code>createCustomElement</code> כמו בדוגמא: <code>{{ importCreateCustomElement }}</code>, 
+  <br> רשום את הservice <code>injector</code> במתודה <code>constructor</code> כמו בדוגמא: <code>{{ constructorExample }}</code>,
+  <br> כעת ניצור property שמכיל את הcomponent שאנחנו מעוניינים לעשות אותו html, עושים זאת על ידי שימוש במתודה <code>createCustomElement</code>, 
+  מכניסים למתודה שני פרמטרים הראשון זה הcomponent שהופכים לאלמנט, והפרמטר השני זה ה<code>injector</code>, כמו בדוגמא: <code>{{ createCustomElement }}</code>,
+  <br> כעת נעשה מהproperty הנ"ל אלמנט html על ידי המתודה <code>customElements.define()</code>, למתודה נכניס שני פרמטרים, 
+  הראשון זה string שהוא יהיה הselctor של האלמנט, והפרמטר השני זה הproperty הנ"ל שמחזיק את הcomponent, כמו בדוגמא: <code>{{ customElements }}</code>,
+  <app-complate-example [card]='complateExample' download='angular-element.zip'></app-complate-example>
+</p>

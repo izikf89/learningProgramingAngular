@@ -1,0 +1,83 @@
+<p>
+   בפרק זה מובא הדגמה מינמלית של אתר אנגולר והסבר על קובץ מודול וcomponent,
+</p>
+
+<h4>יצירה</h4>
+<p>
+  1) צור פרוייקט בcli על ידי הפקודה: <span class='cmd'>ng new hello</span> (זה יכול לקחת 10 דקות), לאחר מכן נווט לתוך התיקייה על ידי הפקודה <span class='cmd'>cd hello</span>,
+  <br>2) הפעל את השרת על ידי הפקודה <span class='cmd'> ng s -o</span>, כעת יפתח הדפדפן ויעלה האתר,
+  <br>האתר אמור להראות כך:
+</p>
+<img src='assets\img\hello.PNG' style="height:500px;width:500px">
+
+<h4>component</h4>
+<p>
+  בתוך תיקיית הפרוייקט כנסו לתיקיית src לאחר מכן נווט לתיקיית app, כעת כנסו לקובץ app.component.ts, הוא צריך להראות כך:
+</p>
+<app-card [text]='componentFile'></app-card>
+<h6>הסבר</h6>
+<p>
+  קלאסים מסוג component הם למעשה החלק העיקרי של האתר, בהם יש את הHTML של האתר,
+  <br> component הוא למעשה קלאס שהוגדר על ידי decorated <code>@Component</code>,
+  <br> component יוצר תג html חדש שמכיל html, css וtypescript, הסבר כיצד מגדירים:
+</p>
+<ul>
+  <li>
+    שם התג שנוצר מוגדר בproperty <code>selector</code> כמו זה:
+    <app-card [text]='selectorExample'></app-card>  
+    במקרה הזה הוגדר תג בשם app-root,
+  </li>
+  <li> 
+    הtypescript נמצא בתוך הקלאס כך:
+    <app-card [text]='typescriptExample'></app-card>  
+  </li>
+  <li> 
+    הHTML והcss נמצאים בproperties של המתודה Component@,
+    <br> הHTML והcss יכולים ליכתב ישירות לproperties כך:
+    <app-card [text]='htmlCssExample1'></app-card>  
+    הproperties יכולים להכיל במקום זאת קישור לקובץ html או css כך:
+    <app-card [text]='htmlCssExample2'></app-card>  
+  </li>
+</ul>
+<p>
+  המעלה הגדולה של component זה שכל component חי לעצמו ואין לcomponent אחרים השפעה עליו בtypescript והcss שלהם, מה שמאפשר לבנות את האתר כאילו הוא עשוי ממספר אתרים נפרדים באותו עמוד, 
+  <br>כשהcli יוצר component הוא יוצר איתו קבצי html css וקובץ טסט,
+</p>
+
+<h4>קובץ מודול</h4>
+<p>
+  בתיקיית app כנסו לקובץ מודול (app.module.ts), הוא צריך להראות כך:
+</p>
+<app-card [text]='moduleFile'></app-card>
+<h6>הסבר</h6>
+<p>
+  קובץ מודול מכיל את כל הקלאסים שקיימים בפרוייקט (יכולים להיות כמה מודולים), קלאס שלא נרשם במודול לא יעבוד,
+  <br> קובץ מודול מכיל מספר properties שכל אחד מהם מכיל מערך של קלאסים,
+  <br> הקלאסים שנרשמים במודול חייבים להיות מיובאים לקובץ שבו נמצא הקלאס מודול על ידי <code>import</code>,
+  <br> כל סוג קלאס צריך להירשם בproperty המתאים, פירוט:
+</p>
+<ul>
+    <li>
+      <b>declartions -</b> מכיל את כל הקלאסים מסוג component directive ו pipe, 
+      <br>אפשר לרשום קלאס מהסוג הנ"ל בקובץ מודול אחד בלבד, כדי שיהיה אפשר להשתמש בו גם במודולים אחרים צריך לרשום אותו גם בexports,
+    </li>
+    <li>
+      <b>imports -</b> מכיל קלאסים מסוג מודול בלבד, 
+      <br> בתוך המודול שבו נרשם ניתן להשתמש בכל הקלאסים שנרשמו במודול הנרשם,
+    </li>
+    <li>
+      <b>providers -</b> מכיל את כל הקלאסים מסוג service,
+      <br> רישום של service יוצר העתק חדש של ה service לשימוש המודול שבו הוא נרשם בלבד,
+    </li>
+    <li>
+      <b>exports -</b> מכיל קלאסים שנרשמו כבר במודול,
+      <br> קלאסים שרשומים פה יהיו זמינים גם במודולים אחרים,
+    </li>
+    <li>
+      <b>bootstrap -</b> מכיל קלאסים מסוג component בלבד, 
+      <br> ה property הזה מופיע אך ורק במודול הראשי של הפרוייקט, 
+      <br> הקלאסים שרשומים פה הם אלה שיתחילו לעבוד כשהאתר יעלה,
+      <br> component שרשומים בbootstrap התג שלהם צריך להיות בקובץ index.html,
+    </li>
+</ul>
+
